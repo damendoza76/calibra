@@ -1,0 +1,109 @@
+.quien {
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  color: var(--ink-faint);
+  margin: -8px 0 6px;
+}
+.bloque {
+  padding: 12px 0;
+}
+.rpeCabeza {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 4px 0 0;
+}
+.rpeNum {
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--accent-deep);
+  min-width: 1.6ch;
+}
+.rpeTxt {
+  font-family: var(--f-mono);
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+.marcas {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 12px;
+  margin-top: -6px;
+  font-family: var(--f-mono);
+  font-size: 0.6rem;
+  color: var(--ink-faint);
+}
+.marcaActiva {
+  color: var(--accent-deep);
+  font-weight: 600;
+}
+.carga {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 0 10px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: var(--accent-soft);
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  margin: 4px 0 6px;
+}
+.cargaK {
+  font-family: var(--f-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.cargaV {
+  grid-row: span 2;
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: 3rem;
+  line-height: 0.95;
+  color: var(--ink);
+}
+.cargaF {
+  font-family: var(--f-mono);
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+.chips,
+.fechas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.fechas {
+  margin-top: 9px;
+  align-items: center;
+}
+.fechas :global(.input) {
+  flex: 1;
+  min-width: 140px;
+}
+.chip {
+  min-height: 40px;
+  padding: 8px 13px;
+  border-radius: 100px;
+  border: 1px solid var(--line-2);
+  background: var(--bg);
+  font-size: 0.74rem;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+.chipActiva {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--ink);
+  font-weight: 600;
+}
+.pie {
+  position: sticky;
+  bottom: calc(-20px - env(safe-area-inset-bottom, 0px));
+  margin: 0 -16px;
+  padding: 12px 16px calc(20px + env(safe-area-inset-bottom, 0px));
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--surface) 0%, transparent), var(--surface) 30%);
+}

@@ -1,0 +1,58 @@
+.rejilla {
+  stroke: var(--line);
+}
+.eje {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  fill: var(--ink-faint);
+}
+.titEje {
+  font-family: var(--f-mono);
+  font-size: 9.5px;
+  fill: var(--ink-soft);
+}
+.zonaSobre {
+  fill: var(--warn-soft);
+  opacity: 0.55;
+}
+.zonaTxt {
+  font-family: var(--f-mono);
+  font-size: 8.5px;
+  fill: var(--ink-faint);
+  letter-spacing: 0.04em;
+}
+.diagonal {
+  stroke: var(--ink-soft);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 4;
+}
+.diagTxt {
+  font-family: var(--f-mono);
+  font-size: 8.5px;
+  fill: var(--ink-soft);
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 3px;
+}
+.franja {
+  fill: var(--accent);
+  opacity: 0.16;
+}
+.linea {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+.punto {
+  fill: var(--accent-deep);
+  stroke: var(--surface);
+  stroke-width: 1.5;
+}
+.puntoN {
+  font-family: var(--f-mono);
+  font-size: 8px;
+  font-weight: 600;
+  fill: var(--surface);
+  pointer-events: none;
+}

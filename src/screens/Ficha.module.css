@@ -1,0 +1,138 @@
+.cabeza {
+  position: relative;
+  margin-top: 8px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-lift);
+  padding: 0 16px 16px;
+  overflow: hidden;
+}
+.franja {
+  height: 54px;
+  margin: 0 -16px;
+  background:
+    repeating-linear-gradient(to bottom, transparent 0 13px, rgba(255, 255, 255, 0.18) 13px 14px),
+    linear-gradient(120deg, var(--color), color-mix(in srgb, var(--color) 55%, var(--accent)));
+}
+.identidad {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: -30px;
+}
+.identidad > :first-child {
+  box-shadow: 0 0 0 4px var(--surface), var(--shadow);
+}
+.nombreCaja {
+  flex: 1;
+  min-width: 0;
+  padding-top: 38px;
+}
+.nombre {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  overflow-wrap: anywhere;
+}
+.nota {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  font-family: var(--f-mono);
+  font-size: 0.7rem;
+  color: var(--ink-faint);
+  margin-top: 4px;
+}
+.ejemplo {
+  font-size: 0.56rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  border: 1px solid color-mix(in srgb, var(--accent) 50%, transparent);
+  border-radius: 100px;
+  padding: 2px 7px;
+}
+.editar {
+  flex: none;
+  align-self: flex-start;
+  margin-top: 36px;
+}
+.resumen {
+  display: flex;
+  gap: 16px;
+  margin-top: 14px;
+  font-family: var(--f-mono);
+  font-size: 0.66rem;
+  color: var(--ink-faint);
+}
+.resumen b {
+  font-family: var(--f-display);
+  font-size: 1.25rem;
+  color: var(--ink);
+  font-weight: 800;
+  margin-right: 2px;
+}
+.acciones {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 14px;
+}
+.acciones :global(.btn) {
+  font-size: 0.74rem;
+  letter-spacing: 0.02em;
+  padding-inline: 8px;
+  text-transform: none;
+}
+.h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.actualizacion {
+  margin-top: 14px;
+  background:
+    linear-gradient(var(--surface), var(--surface)) padding-box,
+    linear-gradient(135deg, var(--accent), transparent 60%) border-box;
+  border: 1.5px solid transparent;
+}
+.seccion {
+  margin-top: 14px;
+}
+.metodo {
+  margin-top: 8px;
+  padding: 0 4px;
+}
+.metodo summary {
+  font-family: var(--f-mono);
+  font-size: 0.7rem;
+  color: var(--accent-deep);
+  cursor: pointer;
+  padding: 8px 0;
+  min-height: 36px;
+}
+.metodo p {
+  font-size: 0.86rem;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+.metodo p + p {
+  margin-top: 8px;
+}
+.lista {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.borrarSesion {
+  min-width: 32px;
+  min-height: 32px;
+  border: 0;
+  background: none;
+  color: var(--ink-faint);
+  cursor: pointer;
+  font-size: 0.8rem;
+}

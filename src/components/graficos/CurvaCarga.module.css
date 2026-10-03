@@ -1,0 +1,74 @@
+.rejilla {
+  stroke: var(--line);
+}
+.base {
+  stroke: var(--line-2);
+}
+.eje {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  fill: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+}
+.barra {
+  filter: var(--color-ficha-filtro, none);
+}
+.animada .barra {
+  transform-box: fill-box;
+  transform-origin: bottom;
+  animation: crecer 380ms var(--ease) both;
+}
+@keyframes crecer {
+  from {
+    transform: scaleY(0);
+  }
+}
+.linea {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.desvioArriba {
+  fill: var(--warn);
+  stroke: var(--surface);
+  stroke-width: 1.5;
+}
+.desvioAbajo {
+  fill: var(--surface);
+  stroke: var(--warn);
+  stroke-width: 1.8;
+}
+.leyenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin-top: 8px;
+  font-family: var(--f-mono);
+  font-size: 0.62rem;
+  color: var(--ink-faint);
+}
+.leyenda span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.leyenda i {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+.lLinea {
+  height: 2px !important;
+  background: var(--ink);
+}
+.lArriba {
+  border-radius: 50% !important;
+  background: var(--warn);
+}
+.lAbajo {
+  border-radius: 50% !important;
+  border: 1.8px solid var(--warn);
+}

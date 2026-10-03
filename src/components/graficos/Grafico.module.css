@@ -1,0 +1,71 @@
+.grafico {
+  margin: 0;
+}
+.titulo {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+.lienzo {
+  margin-top: 10px;
+}
+.lienzo svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.frase {
+  margin-top: 12px;
+  padding-top: 11px;
+  border-top: 1px solid var(--line);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+.marca {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-family: var(--f-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  background: var(--accent-soft);
+  border: 1px dashed color-mix(in srgb, var(--accent) 60%, transparent);
+  border-radius: 100px;
+  padding: 5px 10px;
+}
+.tabla {
+  margin-top: 10px;
+  font-size: 0.8rem;
+}
+.tabla summary {
+  font-family: var(--f-mono);
+  font-size: 0.68rem;
+  color: var(--accent-deep);
+  cursor: pointer;
+  padding: 6px 0;
+  min-height: 32px;
+}
+.tabla table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--f-mono);
+  font-size: 0.7rem;
+  font-variant-numeric: tabular-nums;
+}
+.tabla th,
+.tabla td {
+  text-align: right;
+  padding: 6px 4px;
+  border-top: 1px solid var(--line);
+}
+.tabla th:first-child,
+.tabla td:first-child {
+  text-align: left;
+}
+.tabla th {
+  font-weight: 500;
+  color: var(--ink-faint);
+  border-top: 0;
+}
