@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { useEffect, useRef, type ReactNode } from 'react'
 import s from './Hoja.module.css'
 
@@ -20,7 +20,7 @@ export function Hoja({ titulo, onCerrar, children }: { titulo: string; onCerrar:
 
   return (
     <div className={s.velo} onClick={(e) => e.target === e.currentTarget && onCerrar()}>
-      <motion.div
+      <m.div
         ref={caja}
         className={s.hoja}
         role="dialog"
@@ -38,7 +38,7 @@ export function Hoja({ titulo, onCerrar, children }: { titulo: string; onCerrar:
           </button>
         </div>
         {children}
-      </motion.div>
+      </m.div>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
 import { db, guardarAjustes } from '../db'
@@ -27,7 +27,7 @@ export function Introduccion({ rolActual }: { rolActual: Rol | null }) {
 
   return (
     <div className={s.velo}>
-      <motion.div
+      <m.div
         className={s.hoja}
         role="dialog"
         aria-modal="true"
@@ -97,7 +97,7 @@ export function Introduccion({ rolActual }: { rolActual: Rol | null }) {
           ¿Usabas la versión de la charla? Trae aquí tu respaldo →
         </button>
         <p className={s.privado}>Todo queda en este teléfono. Sin cuenta, sin servidor.</p>
-      </motion.div>
+      </m.div>
     </div>
   )
 }

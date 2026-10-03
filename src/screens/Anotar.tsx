@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { Avatar } from '../components/Avatar'
@@ -93,7 +93,7 @@ export function Anotar() {
     return (
       <>
         <Encabezado volver />
-        <motion.div
+        <m.div
           className={s.listo}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -117,7 +117,7 @@ export function Anotar() {
               Volver a Hoy
             </Link>
           </div>
-        </motion.div>
+        </m.div>
       </>
     )
   }
@@ -225,9 +225,9 @@ export function Anotar() {
         <div className={s.pie}>
           <AnimatePresence>
             {error && (
-              <motion.p className="status-line bad" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} role="alert">
+              <m.p className="status-line bad" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} role="alert">
                 {error}
-              </motion.p>
+              </m.p>
             )}
           </AnimatePresence>
           <button type="submit" className="btn btn-primary">

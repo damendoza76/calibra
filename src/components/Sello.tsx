@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 import s from './Sello.module.css'
 
 type Props = {
@@ -17,7 +17,7 @@ export function Sello({ confianza, estado, estampar, pequeno }: Props) {
   const etiqueta = `Confianza ${confianza}%, ${texto}`
   if (estampar && !reducir) {
     return (
-      <motion.div
+      <m.div
         className={clase}
         role="img"
         aria-label={etiqueta}
@@ -27,7 +27,7 @@ export function Sello({ confianza, estado, estampar, pequeno }: Props) {
       >
         <span className={`${s.n} num`}>{confianza}%</span>
         {texto}
-      </motion.div>
+      </m.div>
     )
   }
   return (

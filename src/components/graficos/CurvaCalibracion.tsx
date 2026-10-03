@@ -1,5 +1,5 @@
 import { scaleLinear } from '@visx/scale'
-import { motion, useReducedMotion } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 import type { Analisis } from '../../domain/calibracion'
 import s from './CurvaCalibracion.module.css'
 
@@ -72,7 +72,7 @@ export function CurvaCalibracion({ a }: { a: Analisis }) {
       ))}
 
       {a.bandas.length > 1 && (
-        <motion.path
+        <m.path
           d={linea}
           className={s.linea}
           initial={reducir ? false : { pathLength: 0 }}
@@ -81,7 +81,7 @@ export function CurvaCalibracion({ a }: { a: Analisis }) {
         />
       )}
       {a.bandas.map((b, i) => (
-        <motion.g
+        <m.g
           key={'p' + b.lo}
           initial={reducir ? false : { opacity: 0, scale: 0.3 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -92,7 +92,7 @@ export function CurvaCalibracion({ a }: { a: Analisis }) {
           <text x={x(b.dices)} y={y(b.ocurre) + 3} textAnchor="middle" className={s.puntoN}>
             {b.n}
           </text>
-        </motion.g>
+        </m.g>
       ))}
 
       <text x={(M.l + W - M.r) / 2} y={H - 8} textAnchor="middle" className={s.titEje}>

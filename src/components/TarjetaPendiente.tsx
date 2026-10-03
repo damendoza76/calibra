@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 import { useState } from 'react'
 import { fraseContradiccion } from '../domain/calibracion'
 import { cuando, fechaCorta } from '../domain/lenguaje'
@@ -84,7 +84,7 @@ export function TarjetaPendiente({ p, deportista, hoy, onCerrar, onBorrar, mostr
 
       <AnimatePresence>
         {cerrada && (
-          <motion.p
+          <m.p
             className={`${s.cierre} ${contradice ? s.honesta : ''}`}
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
@@ -92,7 +92,7 @@ export function TarjetaPendiente({ p, deportista, hoy, onCerrar, onBorrar, mostr
             role="status"
           >
             {contradice ?? 'Cerrada. Ya cuenta para tu calibración.'}
-          </motion.p>
+          </m.p>
         )}
       </AnimatePresence>
     </article>

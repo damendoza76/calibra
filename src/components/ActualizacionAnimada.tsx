@@ -1,4 +1,4 @@
-import { animate, motion, useReducedMotion } from 'framer-motion'
+import { animate, m, useReducedMotion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { fraseActualizacion, type Actualizacion } from '../domain/carga'
 import s from './ActualizacionAnimada.module.css'
@@ -41,29 +41,29 @@ export function ActualizacionAnimada({ a, clave, nombre }: { a: Actualizacion; c
   return (
     <div className={s.caja} key={clave}>
       <div className={s.fila} aria-hidden="true">
-        <motion.div className={s.col} {...paso(0)}>
+        <m.div className={s.col} {...paso(0)}>
           <span className={`${s.n} num`}>{p}</span>
           <span className={s.k}>lo que esperabas</span>
-        </motion.div>
-        <motion.span className={s.flecha} {...paso(1)}>
+        </m.div>
+        <m.span className={s.flecha} {...paso(1)}>
           →
-        </motion.span>
-        <motion.div className={s.col} {...paso(1)}>
+        </m.span>
+        <m.div className={s.col} {...paso(1)}>
           <span className={`${s.n} ${s.real} num`}>{r}</span>
           <span className={s.k}>lo que pasó</span>
-        </motion.div>
-        <motion.span className={s.flecha} {...paso(2)}>
+        </m.div>
+        <m.span className={s.flecha} {...paso(2)}>
           →
-        </motion.span>
-        <motion.div className={s.col} {...paso(2)}>
+        </m.span>
+        <m.div className={s.col} {...paso(2)}>
           <span className={`${s.n} ${s.nueva} num`}>{mostrado}</span>
           <span className={s.k}>tu nueva expectativa</span>
-        </motion.div>
+        </m.div>
       </div>
-      <motion.p className={s.frase} {...paso(3)}>
+      <m.p className={s.frase} {...paso(3)}>
         {fraseActualizacion(a)}
         {nombre ? ` (${nombre})` : ''}
-      </motion.p>
+      </m.p>
       <p className={s.formula}>
         {p} + (1/{a.n}) × ({r} − {p}) = {q}
       </p>
