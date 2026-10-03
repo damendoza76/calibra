@@ -156,4 +156,9 @@ IBM Plex Mono, incluidas dentro de la app.
 
 ---
 
+## Licencia
+
+Código abierto con licencia [MIT](LICENSE): puedes usarlo, adaptarlo para tu equipo, tu gimnasio o tu colegio, y
+publicar tu propia versión, siempre que conserves el aviso de autoría del archivo `LICENSE`.
+
 Dr. Darío Mendoza Romero · UPTC Chiquinquirá, 2026
