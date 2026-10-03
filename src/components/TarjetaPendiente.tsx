@@ -20,6 +20,13 @@ type Props = {
 /** Una pendiente (o una recién cerrada, mientras se ve el sello). */
 export function TarjetaPendiente({ p, deportista, hoy, onCerrar, onBorrar, mostrarPersona = true }: Props) {
   const [armado, setArmado] = useState(false)
+  // un solo cierre por tarjeta, aunque se toque dos veces seguidas
+  const [cerrando, setCerrando] = useState(false)
+  const cerrarUnaVez = (r: boolean) => {
+    if (cerrando) return
+    setCerrando(true)
+    onCerrar(r)
+  }
   const cerrada = p.estado === 'cerrada'
   const est = estadoPendiente(p, hoy)
   const contradice = cerrada && p.resultado !== null ? fraseContradiccion(p.confianza, p.resultado) : null
@@ -52,26 +59,26 @@ export function TarjetaPendiente({ p, deportista, hoy, onCerrar, onBorrar, mostr
           {est === 'esperando' && <p className={s.aviso}>Todavía no llega la fecha, pero puedes cerrarla si ya sabes qué pasó.</p>}
           <div className={s.pregunta}>¿Qué pasó?</div>
           <div className="btn-row">
-            <button type="button" className="btn btn-yes" onClick={() => onCerrar(true)}>
+            <button type="button" className="btn btn-yes" disabled={cerrando} onClick={() => cerrarUnaVez(true)}>
               Sí ocurrió
             </button>
-            <button type="button" className="btn btn-no" onClick={() => onCerrar(false)}>
+            <button type="button" className="btn btn-no" disabled={cerrando} onClick={() => cerrarUnaVez(false)}>
               No ocurrió
             </button>
-            {onBorrar && (
-              <button
-                type="button"
-                className={`btn btn-ghost btn-sm ${armado ? 'btn-danger' : ''} ${s.borrar}`}
-                onClick={() => {
-                  if (armado) return onBorrar()
-                  setArmado(true)
-                  setTimeout(() => setArmado(false), 4000)
-                }}
-              >
-                {armado ? '¿Seguro?' : 'Borrar'}
-              </button>
-            )}
           </div>
+          {onBorrar && (
+            <button
+              type="button"
+              className={`${s.borrar} ${armado ? s.borrarArmado : ''}`}
+              onClick={() => {
+                if (armado) return onBorrar()
+                setArmado(true)
+                setTimeout(() => setArmado(false), 4000)
+              }}
+            >
+              {armado ? '¿Seguro? Toca otra vez para borrarla' : 'Me equivoqué al anotarla: borrar'}
+            </button>
+          )}
         </div>
       )}
 

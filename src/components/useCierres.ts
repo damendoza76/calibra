@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { borrarPendiente, cerrar, db } from '../db'
 import { fraseContradiccion } from '../domain/calibracion'
+import { ReglaRota } from '../domain/predicciones'
 import type { Prediccion } from '../domain/tipos'
 
 /**
@@ -14,7 +15,14 @@ export function useCierres() {
   useEffect(() => () => temporizadores.current.forEach(clearTimeout), [])
 
   const cerrarConSello = useCallback(async (p: Prediccion, resultado: boolean) => {
-    const cerrada = await cerrar(db, p.id, resultado)
+    let cerrada: Prediccion
+    try {
+      cerrada = await cerrar(db, p.id, resultado)
+    } catch (e) {
+      // ya estaba cerrada (doble toque, u otra pestaña): la base la protegió, no hay nada que hacer
+      if (e instanceof ReglaRota) return
+      throw e
+    }
     setRecientes((m) => new Map(m).set(cerrada.id, cerrada))
     const espera = fraseContradiccion(cerrada.confianza, resultado) ? 7000 : 2600
     temporizadores.current.push(

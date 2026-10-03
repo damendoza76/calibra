@@ -7,6 +7,7 @@ import { estadoPendiente } from './domain/predicciones'
 import { Anotar } from './screens/Anotar'
 import { Hoy } from './screens/Hoy'
 import { Introduccion } from './screens/Introduccion'
+import { Pendientes } from './screens/Pendientes'
 import { useTema } from './theme/useTema'
 import s from './App.module.css'
 
@@ -47,7 +48,7 @@ function Marco() {
           <Route path="/deportistas" element={<Pronto titulo="Deportistas" />} />
           <Route path="/deportistas/:id" element={<Pronto titulo="Ficha" />} />
           <Route path="/anotar" element={<Anotar />} />
-          <Route path="/pendientes" element={<Pronto titulo="Pendientes" />} />
+          <Route path="/pendientes" element={<Pendientes />} />
           <Route path="/calibracion" element={<Pronto titulo="Calibración" />} />
           <Route path="/ajustes" element={<Pronto titulo="Ajustes" />} />
           <Route path="*" element={<Hoy />} />

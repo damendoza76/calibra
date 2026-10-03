@@ -66,8 +66,21 @@
   margin-bottom: 7px;
 }
 .borrar {
-  flex: 0 0 auto !important;
-  min-height: 48px;
+  display: block;
+  margin: 8px auto 0;
+  min-height: 36px;
+  padding: 6px 10px;
+  border: 0;
+  background: none;
+  font-size: 0.66rem;
+  color: var(--ink-faint);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.borrarArmado {
+  color: var(--warn);
+  font-weight: 600;
 }
 .cierre {
   margin-top: 11px;

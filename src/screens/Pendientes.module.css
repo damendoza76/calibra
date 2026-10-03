@@ -1,0 +1,114 @@
+.titulo {
+  font-size: 2.3rem;
+  font-weight: 800;
+}
+.grupo {
+  font-family: var(--f-mono);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 22px 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.grupo::after {
+  content: '';
+  flex: 1;
+  border-top: 1px dashed var(--line-2);
+}
+.grupoTarde {
+  color: var(--warn);
+}
+.lista {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+/* ---------- historial ---------- */
+.historial {
+  padding: 4px 16px 14px;
+}
+.filas {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.fila {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+  font-size: 0.94rem;
+}
+.fila:first-child {
+  border-top: none;
+}
+.marca {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+.si {
+  color: var(--ok);
+  background: var(--ok-soft);
+}
+.no {
+  color: var(--warn);
+  background: var(--warn-soft);
+}
+.texto {
+  flex: 1;
+  min-width: 0;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+.texto small {
+  display: block;
+  font-family: var(--f-mono);
+  font-size: 0.64rem;
+  color: var(--ink-faint);
+  margin-top: 4px;
+}
+.punto {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: 0;
+}
+.conf {
+  flex: none;
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--ink-soft);
+}
+.congelada {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  font-family: var(--f-mono);
+  font-size: 0.66rem;
+  color: var(--ink-faint);
+  line-height: 1.4;
+}
+.congelada svg {
+  flex: none;
+}
+.historial :global(.btn) {
+  width: 100%;
+  margin-top: 6px;
+}
