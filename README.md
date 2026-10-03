@@ -1,32 +1,13 @@
-# React + TypeScript + Vite
+# Calibra
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Bitácora de pronósticos para entrenadores, instructores de gimnasio y profes de educación física.
+Anota lo que crees que va a pasar **antes** de saberlo, ciérralo después y mira qué tan calibrado está tu criterio.
 
-Currently, two official plugins are available:
+> Si se anota después, ya no es un pronóstico: es una excusa.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Artefacto de la conferencia «Del cronómetro al algoritmo: cuando los datos empiezan a entrenar mejor que nosotros»
+(Dr. Darío Mendoza Romero · II Seminario en Prospectivas Ocupacionales en Educación Física, Recreación y Deporte · UPTC Chiquinquirá, 2026).
 
-## React Compiler
+Todo vive en el teléfono de quien la usa: sin cuentas, sin servidor, sin analítica.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+*Guía completa de instalación y publicación: en preparación.*

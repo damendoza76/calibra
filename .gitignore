@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# configuración local del editor y de la vista previa
+.claude/
