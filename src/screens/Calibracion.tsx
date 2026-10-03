@@ -49,7 +49,11 @@ export function Calibracion() {
   const meses = sesgoMensual(datos)
   const mapa = mapaAciertos(datos, hoy, 12)
   const hayFiltro = !!persona || dias !== null || rol !== null
-  const conFichas = deportistas.filter((d) => predicciones.some((p) => p.deportistaId === d.id && p.estado === 'cerrada'))
+  // con datos reales suficientes pero un filtro demasiado estrecho, no mostramos un ejemplo: confundiría
+  const filtroSinDatos = esEjemplo && hayFiltro && totalCierres >= MIN_CIERRES
+  const conFichas = deportistas.filter((d) =>
+    predicciones.some((p) => p.deportistaId === d.id && p.estado === 'cerrada'),
+  )
 
   return (
     <>
@@ -77,7 +81,13 @@ export function Calibracion() {
         </label>
         <div className={s.chips} role="group" aria-label="Periodo">
           {PERIODOS.map((p) => (
-            <button key={p.k} type="button" aria-pressed={dias === p.dias} className={s.chip} onClick={() => setDias(p.dias)}>
+            <button
+              key={p.k}
+              type="button"
+              aria-pressed={dias === p.dias}
+              className={s.chip}
+              onClick={() => setDias(p.dias)}
+            >
               {p.k}
             </button>
           ))}
@@ -94,106 +104,131 @@ export function Calibracion() {
         </div>
       </div>
 
-      {esEjemplo && (
-        <div className="banner banner-note">
-          <span className="ic">◑</span>
-          <span>
-            {hayFiltro && totalCierres >= MIN_CIERRES ? (
-              <>
-                Con este filtro hay <strong>{reales.length}</strong> {reales.length === 1 ? 'cierre' : 'cierres'}: no alcanza
-                para una lectura. Prueba con un filtro más amplio.
-              </>
-            ) : (
-              <>
+      {filtroSinDatos ? (
+        <div className="empty">
+          <h3>Pocos datos con este filtro</h3>
+          <p>
+            Hay {reales.length} {reales.length === 1 ? 'cierre' : 'cierres'} con este filtro y hacen falta {MIN_CIERRES}{' '}
+            para una lectura que valga la pena. Prueba con un periodo más largo o con todas las personas.
+          </p>
+          <button
+            type="button"
+            className="btn"
+            style={{ marginTop: 14 }}
+            onClick={() => {
+              setPersona('')
+              setDias(null)
+              setRol(null)
+            }}
+          >
+            Quitar los filtros
+          </button>
+        </div>
+      ) : (
+        <>
+          {esEjemplo && (
+            <div className="banner banner-note">
+              <span className="ic">◑</span>
+              <span>
                 {reales.length === 0
                   ? 'Tu panel se llena solo, con cada pronóstico que cierres. '
                   : `Llevas ${reales.length} ${reales.length === 1 ? 'pronóstico cerrado' : 'pronósticos cerrados'}. `}
                 <strong>
                   Faltan {MIN_CIERRES - reales.length} {MIN_CIERRES - reales.length === 1 ? 'cierre' : 'cierres'}
                 </strong>{' '}
-                para que el cálculo diga algo que valga la pena. Mientras tanto, así se ve con el historial de alguien que ya
-                lleva un rato.
-              </>
-            )}
-          </span>
-        </div>
-      )}
-
-      {/* ---------- veredicto ---------- */}
-      <section className={`card ${s.veredicto} ${s[v.tipo]}`} aria-labelledby="veredicto">
-        {esEjemplo && <MarcaEjemplo />}
-        <p id="veredicto" className={s.titular}>
-          {v.titular}
-        </p>
-        <p className={s.detalle}>{v.detalle}</p>
-        <MedidorGrande sesgo={a.sesgo} />
-        <p className={s.lectura}>{lectura(a)}</p>
-        <div className={s.cifras}>
-          <div>
-            <span className={s.k}>cerradas</span>
-            <span className={`${s.v} num`}>{a.n}</span>
-          </div>
-          <div>
-            <span className={s.k}>dices en promedio</span>
-            <span className={`${s.v} num`}>{Math.round(a.dices)}%</span>
-          </div>
-          <div>
-            <span className={s.k}>ocurre de verdad</span>
-            <span className={`${s.v} num`}>{Math.round(a.ocurre)}%</span>
-          </div>
-        </div>
-      </section>
-
-      <div className={s.graficos}>
-        <Grafico titulo="Lo que dijiste vs. lo que pasó" ejemplo={esEjemplo} frase={fraseBarras(a)} tabla={<TablaBandas a={a} />}>
-          <BarrasPareadas a={a} />
-          <LeyendaBarras />
-        </Grafico>
-
-        <Grafico titulo="Curva de calibración" ejemplo={esEjemplo} frase={fraseCurva(a)} tabla={<TablaBandas a={a} />}>
-          <CurvaCalibracion a={a} />
-        </Grafico>
-
-        <Grafico
-          titulo="¿Te estás calibrando?"
-          ejemplo={esEjemplo}
-          frase={fraseSesgo(meses)}
-          tabla={
-            <table>
-              <thead>
-                <tr>
-                  <th>Mes</th>
-                  <th>cierres</th>
-                  <th>desvío</th>
-                </tr>
-              </thead>
-              <tbody>
-                {meses.map((m) => (
-                  <tr key={m.mes}>
-                    <td>{mesLargo(m.mes)}</td>
-                    <td>{m.n}</td>
-                    <td>
-                      {m.sesgo > 0 ? '+' : ''}
-                      {Math.round(m.sesgo)} {m.fiable ? '' : '(pocos datos)'}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          }
-        >
-          {meses.length > 0 ? (
-            <SesgoMensual meses={meses} />
-          ) : (
-            <p className="note">Todavía no hay meses que comparar.</p>
+                para que el cálculo diga algo que valga la pena. Mientras tanto, así se ve con el historial de alguien
+                que ya lleva un rato.
+              </span>
+            </div>
           )}
-        </Grafico>
 
-        <Grafico titulo="Tu constancia" ejemplo={esEjemplo} frase={fraseMapa(mapa)}>
-          <MapaConstancia dias={mapa} />
-          <LeyendaMapa />
-        </Grafico>
-      </div>
+          {/* ---------- veredicto ---------- */}
+          <section className={`card ${s.veredicto} ${s[v.tipo]}`} aria-labelledby="veredicto">
+            {esEjemplo && <MarcaEjemplo />}
+            <p id="veredicto" className={s.titular}>
+              {v.titular}
+            </p>
+            <p className={s.detalle}>{v.detalle}</p>
+            <MedidorGrande sesgo={a.sesgo} />
+            <p className={s.lectura}>{lectura(a)}</p>
+            <div className={s.cifras}>
+              <div>
+                <span className={s.k}>cerradas</span>
+                <span className={`${s.v} num`}>{a.n}</span>
+              </div>
+              <div>
+                <span className={s.k}>dices en promedio</span>
+                <span className={`${s.v} num`}>{Math.round(a.dices)}%</span>
+              </div>
+              <div>
+                <span className={s.k}>ocurre de verdad</span>
+                <span className={`${s.v} num`}>{Math.round(a.ocurre)}%</span>
+              </div>
+            </div>
+          </section>
+
+          <div className={s.graficos}>
+            <Grafico
+              titulo="Lo que dijiste vs. lo que pasó"
+              ejemplo={esEjemplo}
+              frase={fraseBarras(a)}
+              tabla={<TablaBandas a={a} />}
+            >
+              <BarrasPareadas a={a} />
+              <LeyendaBarras />
+            </Grafico>
+
+            <Grafico
+              titulo="Curva de calibración"
+              ejemplo={esEjemplo}
+              frase={fraseCurva(a)}
+              tabla={<TablaBandas a={a} />}
+            >
+              <CurvaCalibracion a={a} />
+            </Grafico>
+
+            <Grafico
+              titulo="¿Te estás calibrando?"
+              ejemplo={esEjemplo}
+              frase={fraseSesgo(meses)}
+              tabla={
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Mes</th>
+                      <th>cierres</th>
+                      <th>desvío</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {meses.map((m) => (
+                      <tr key={m.mes}>
+                        <td>{mesLargo(m.mes)}</td>
+                        <td>{m.n}</td>
+                        <td>
+                          {m.sesgo > 0 ? '+' : ''}
+                          {Math.round(m.sesgo)} {m.fiable ? '' : '(pocos datos)'}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              }
+            >
+              {meses.length > 0 ? (
+                <SesgoMensual meses={meses} />
+              ) : (
+                <p className="note">Todavía no hay meses que comparar.</p>
+              )}
+            </Grafico>
+
+            <Grafico titulo="Tu constancia" ejemplo={esEjemplo} frase={fraseMapa(mapa)}>
+              <MapaConstancia dias={mapa} />
+              <LeyendaMapa />
+            </Grafico>
+          </div>
+        </>
+      )}
 
       <p className="note" style={{ marginTop: 16, textAlign: 'center' }}>
         Cada número sale solo de lo que anotaste y cerraste. Nada de esto pronostica por ti:{' '}
