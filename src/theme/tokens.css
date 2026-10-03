@@ -5,9 +5,9 @@
   --surface-2: #ebe4d3;
   --ink: #16120b;
   --ink-soft: #4b4535;
-  --ink-faint: #756e59; /* v1 usaba #8B836D; oscurecido para pasar AA en texto pequeño */
+  --ink-faint: #6a634f; /* v1 usaba #8B836D; oscurecido para pasar AA en texto pequeño */
   --accent: #e39a00;
-  --accent-deep: #9e6a05;
+  --accent-deep: #8f6005; /* v1: #9E6A05; un punto más oscuro para AA sobre el papel */
   --accent-soft: rgba(227, 154, 0, 0.15);
   --on-accent: #1a1200;
   --ok: #4f7043;
