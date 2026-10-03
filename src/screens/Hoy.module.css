@@ -1,0 +1,169 @@
+.pantalla {
+  padding-bottom: 12px;
+}
+.fecha {
+  font-family: var(--f-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-top: 8px;
+}
+.titulo {
+  font-size: 3.4rem;
+  font-weight: 800;
+  line-height: 0.95;
+  margin-top: 2px;
+}
+.resumen {
+  font-size: 1.02rem;
+  color: var(--ink-soft);
+  margin-top: 6px;
+}
+
+/* ---------- acceso enorme a Anotar ---------- */
+.anotar {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 18px;
+  border-radius: 18px;
+  background: var(--accent);
+  color: var(--on-accent);
+  text-decoration: none;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset, 0 16px 30px -16px rgba(158, 106, 5, 0.85);
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+}
+.anotar::after {
+  /* líneas de libreta */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(to bottom, transparent 0 21px, rgba(26, 18, 0, 0.06) 21px 22px);
+  pointer-events: none;
+}
+.anotar:active {
+  transform: scale(0.985);
+}
+.anotarMas {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: var(--on-accent);
+  color: var(--accent);
+}
+.anotarTexto {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.anotarTexto strong {
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: 1.85rem;
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+.anotarTexto span {
+  font-family: var(--f-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.03em;
+  opacity: 0.8;
+}
+
+/* ---------- franja de calibración ---------- */
+.franja {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 14px 14px 12px;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  color: var(--ink);
+  text-decoration: none;
+}
+.franjaTexto {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.franjaK {
+  font-family: var(--f-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.franjaV {
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+.franjaFlecha {
+  flex: none;
+  color: var(--ink-faint);
+}
+.medidor {
+  flex: none;
+  width: 86px;
+  height: auto;
+}
+.medidorPista {
+  fill: var(--surface-2);
+}
+.medidorZona {
+  fill: var(--ok-soft);
+}
+.medidorCentro {
+  stroke: var(--ink-faint);
+  stroke-dasharray: 2 2;
+}
+.medidorSobre {
+  fill: var(--warn);
+  stroke: var(--surface);
+  stroke-width: 2;
+}
+.medidorSub {
+  fill: var(--accent-deep);
+  stroke: var(--surface);
+  stroke-width: 2;
+}
+.medidorBien {
+  fill: var(--ok);
+  stroke: var(--surface);
+  stroke-width: 2;
+}
+.medidorTxt {
+  font-family: var(--f-mono);
+  font-size: 8px;
+  fill: var(--ink-faint);
+}
+.puntoLleno {
+  fill: var(--accent);
+}
+.puntoVacio {
+  fill: none;
+  stroke: var(--line-2);
+  stroke-width: 1.5;
+  stroke-dasharray: 3 2;
+}
+
+.aviso {
+  margin-top: 16px;
+}
+.lista {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}

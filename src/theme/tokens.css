@@ -1,0 +1,85 @@
+/* Tokens de Calibra. Paleta heredada de la v1; claro, oscuro y automático. */
+:root {
+  --bg: #f5f1e6;
+  --surface: #fffdf8;
+  --surface-2: #ebe4d3;
+  --ink: #16120b;
+  --ink-soft: #4b4535;
+  --ink-faint: #756e59; /* v1 usaba #8B836D; oscurecido para pasar AA en texto pequeño */
+  --accent: #e39a00;
+  --accent-deep: #9e6a05;
+  --accent-soft: rgba(227, 154, 0, 0.15);
+  --on-accent: #1a1200;
+  --ok: #4f7043;
+  --ok-soft: rgba(79, 112, 67, 0.14);
+  --warn: #a8412a;
+  --warn-soft: rgba(168, 65, 42, 0.12);
+  --line: rgba(22, 18, 11, 0.13);
+  --line-2: rgba(22, 18, 11, 0.3);
+  --shadow: 0 1px 2px rgba(22, 18, 11, 0.06), 0 12px 28px -18px rgba(22, 18, 11, 0.3);
+  --shadow-lift: 0 2px 4px rgba(22, 18, 11, 0.07), 0 18px 36px -20px rgba(22, 18, 11, 0.38);
+  --shadow-up: 0 -1px 0 var(--line), 0 -12px 24px -20px rgba(22, 18, 11, 0.35);
+  --paper-grain: rgba(22, 18, 11, 0.025);
+
+  --f-display: 'Big Shoulders Display', 'Arial Narrow', sans-serif;
+  --f-text: 'Source Serif 4 Variable', 'Source Serif 4', Georgia, serif;
+  --f-mono: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
+
+  --r-sm: 8px;
+  --r: 12px;
+  --r-lg: 16px;
+  --t-fast: 150ms;
+  --t: 220ms;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --tabbar-h: 68px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #15120e;
+    --surface: #1e1a14;
+    --surface-2: #282118;
+    --ink: #f2ebdc;
+    --ink-soft: #c6bda6;
+    --ink-faint: #9a927c;
+    --accent: #f7be45;
+    --accent-deep: #ffd886;
+    --accent-soft: rgba(247, 190, 69, 0.16);
+    --on-accent: #1a1200;
+    --ok: #8cb079;
+    --ok-soft: rgba(140, 176, 121, 0.16);
+    --warn: #e08064;
+    --warn-soft: rgba(224, 128, 100, 0.16);
+    --line: rgba(242, 235, 220, 0.14);
+    --line-2: rgba(242, 235, 220, 0.3);
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 14px 30px -18px rgba(0, 0, 0, 0.7);
+    --shadow-lift: 0 2px 4px rgba(0, 0, 0, 0.5), 0 20px 40px -20px rgba(0, 0, 0, 0.8);
+    --shadow-up: 0 -1px 0 var(--line), 0 -14px 26px -20px rgba(0, 0, 0, 0.8);
+    --paper-grain: rgba(242, 235, 220, 0.02);
+    color-scheme: dark;
+  }
+}
+:root[data-theme='dark'] {
+  --bg: #15120e;
+  --surface: #1e1a14;
+  --surface-2: #282118;
+  --ink: #f2ebdc;
+  --ink-soft: #c6bda6;
+  --ink-faint: #9a927c;
+  --accent: #f7be45;
+  --accent-deep: #ffd886;
+  --accent-soft: rgba(247, 190, 69, 0.16);
+  --on-accent: #1a1200;
+  --ok: #8cb079;
+  --ok-soft: rgba(140, 176, 121, 0.16);
+  --warn: #e08064;
+  --warn-soft: rgba(224, 128, 100, 0.16);
+  --line: rgba(242, 235, 220, 0.14);
+  --line-2: rgba(242, 235, 220, 0.3);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 14px 30px -18px rgba(0, 0, 0, 0.7);
+  --shadow-lift: 0 2px 4px rgba(0, 0, 0, 0.5), 0 20px 40px -20px rgba(0, 0, 0, 0.8);
+  --shadow-up: 0 -1px 0 var(--line), 0 -14px 26px -20px rgba(0, 0, 0, 0.8);
+  --paper-grain: rgba(242, 235, 220, 0.02);
+  color-scheme: dark;
+}

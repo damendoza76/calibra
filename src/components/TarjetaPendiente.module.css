@@ -1,0 +1,82 @@
+.tarjeta {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 15px;
+  box-shadow: var(--shadow);
+}
+.vencida {
+  border-color: color-mix(in srgb, var(--warn) 50%, transparent);
+  box-shadow: var(--shadow), inset 3px 0 0 var(--warn);
+}
+.cerrada {
+  background: color-mix(in srgb, var(--surface) 70%, var(--bg));
+}
+.arriba {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.texto {
+  flex: 1;
+  min-width: 0;
+}
+.etiqueta {
+  font-size: 1.04rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+.meta {
+  font-family: var(--f-mono);
+  font-size: 0.68rem;
+  color: var(--ink-faint);
+  margin-top: 7px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+}
+.quien {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--ink-soft);
+}
+.quien > * {
+  font-size: 0.5rem !important;
+}
+.tarde {
+  color: var(--warn);
+  font-weight: 600;
+}
+.acciones {
+  margin-top: 13px;
+}
+.aviso {
+  font-size: 0.8rem;
+  color: var(--ink-faint);
+  margin-bottom: 9px;
+}
+.pregunta {
+  font-family: var(--f-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 7px;
+}
+.borrar {
+  flex: 0 0 auto !important;
+  min-height: 48px;
+}
+.cierre {
+  margin-top: 11px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--line-2);
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+.honesta {
+  color: var(--ink);
+  font-style: italic;
+}

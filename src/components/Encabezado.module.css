@@ -1,0 +1,58 @@
+.barra {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  padding: calc(env(safe-area-inset-top, 0px) + 12px) 0 10px;
+  background: var(--bg);
+  box-shadow: 0 10px 12px -10px var(--bg);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.marca {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  color: var(--ink);
+  text-decoration: none;
+}
+.w {
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: 1.8rem;
+  letter-spacing: 0.02em;
+}
+.w b {
+  color: var(--accent-deep);
+  font-weight: 800;
+}
+.sub {
+  font-family: var(--f-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-top: 3px;
+}
+.derecha {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ajustes,
+.volver {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink-soft);
+  cursor: pointer;
+  box-shadow: var(--shadow);
+}
+.volver {
+  margin-left: -2px;
+}

@@ -1,0 +1,14 @@
+.marco {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 16px calc(var(--tabbar-h) + 40px + env(safe-area-inset-bottom, 0px));
+}
+.cargando {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: 2rem;
+  color: var(--ink-faint);
+}
