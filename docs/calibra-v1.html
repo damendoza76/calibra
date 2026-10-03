@@ -1,0 +1,1147 @@
+<title>Calibra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F1E6;
+  --surface:#FFFDF8;
+  --surface-2:#EBE4D3;
+  --ink:#16120B;
+  --ink-soft:#4B4535;
+  --ink-faint:#8B836D;
+  --accent:#E39A00;
+  --accent-deep:#9E6A05;
+  --accent-soft:rgba(227,154,0,.15);
+  --on-accent:#1A1200;
+  --ok:#4F7043;
+  --ok-soft:rgba(79,112,67,.14);
+  --warn:#A8412A;
+  --warn-soft:rgba(168,65,42,.12);
+  --line:rgba(22,18,11,.13);
+  --line-2:rgba(22,18,11,.30);
+  --shadow:0 1px 2px rgba(22,18,11,.06), 0 12px 28px -18px rgba(22,18,11,.30);
+  --shadow-up:0 -1px 0 var(--line), 0 -12px 24px -20px rgba(22,18,11,.35);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#15120E;
+    --surface:#1E1A14;
+    --surface-2:#282118;
+    --ink:#F2EBDC;
+    --ink-soft:#C6BDA6;
+    --ink-faint:#8D8570;
+    --accent:#F7BE45;
+    --accent-deep:#FFD886;
+    --accent-soft:rgba(247,190,69,.16);
+    --on-accent:#1A1200;
+    --ok:#8CB079;
+    --ok-soft:rgba(140,176,121,.16);
+    --warn:#E08064;
+    --warn-soft:rgba(224,128,100,.16);
+    --line:rgba(242,235,220,.14);
+    --line-2:rgba(242,235,220,.30);
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 14px 30px -18px rgba(0,0,0,.7);
+    --shadow-up:0 -1px 0 var(--line), 0 -14px 26px -20px rgba(0,0,0,.8);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#15120E;
+  --surface:#1E1A14;
+  --surface-2:#282118;
+  --ink:#F2EBDC;
+  --ink-soft:#C6BDA6;
+  --ink-faint:#8D8570;
+  --accent:#F7BE45;
+  --accent-deep:#FFD886;
+  --accent-soft:rgba(247,190,69,.16);
+  --on-accent:#1A1200;
+  --ok:#8CB079;
+  --ok-soft:rgba(140,176,121,.16);
+  --warn:#E08064;
+  --warn-soft:rgba(224,128,100,.16);
+  --line:rgba(242,235,220,.14);
+  --line-2:rgba(242,235,220,.30);
+  --shadow:0 1px 2px rgba(0,0,0,.5), 0 14px 30px -18px rgba(0,0,0,.7);
+  --shadow-up:0 -1px 0 var(--line), 0 -14px 26px -20px rgba(0,0,0,.8);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Source Serif 4',Georgia,'Times New Roman',serif;
+  font-size:16px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  -webkit-text-size-adjust:100%;
+}
+h1,h2,h3,h4,.disp{font-family:'Big Shoulders Display','Arial Narrow',Haettenschweiler,sans-serif;text-wrap:balance;margin:0;letter-spacing:.005em;}
+.mono,.lbl,.chip,.stamp,.num,button,input,select,textarea{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;}
+p{margin:0;}
+:focus-visible{outline:2.5px solid var(--accent-deep);outline-offset:2px;border-radius:4px;}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important;}}
+
+/* ---------- shell ---------- */
+.shell{max-width:560px;margin:0 auto;padding-inline:18px;padding-bottom:104px;}
+
+.appbar{
+  position:sticky;
+  top:env(safe-area-inset-top,0px);
+  z-index:20;
+  background:linear-gradient(to bottom,var(--bg) 62%,rgba(0,0,0,0));
+  padding-block:14px 12px;
+  display:flex;align-items:center;gap:12px;
+}
+.wordmark{display:flex;flex-direction:column;line-height:1;}
+.wordmark .w{font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:1.75rem;letter-spacing:.02em;}
+.wordmark .w b{color:var(--accent-deep);font-weight:800;}
+.wordmark .sub{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin-top:3px;}
+.role-pill{
+  margin-left:auto;display:flex;align-items:center;gap:6px;
+  font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;
+  background:var(--surface);color:var(--ink-soft);
+  border:1px solid var(--line);border-radius:100px;
+  padding:7px 12px;cursor:pointer;
+}
+.role-pill:hover{border-color:var(--line-2);}
+.role-pill .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none;}
+
+/* ---------- generic pieces ---------- */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow);}
+.card + .card{margin-top:14px;}
+.sec-title{display:flex;align-items:baseline;gap:10px;margin:22px 0 12px;}
+.sec-title h2{font-size:1.5rem;font-weight:700;}
+.sec-title .count{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--ink-faint);}
+.hint{font-size:.84rem;color:var(--ink-soft);line-height:1.6;}
+.lbl{display:block;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:7px;}
+.field{margin-bottom:16px;}
+input[type="text"],input[type="date"],textarea{
+  width:100%;padding:13px 12px;border-radius:10px;
+  border:1px solid var(--line-2);background:var(--bg);color:var(--ink);
+  font-family:'Source Serif 4',Georgia,serif;font-size:1rem;
+}
+textarea{font-family:'IBM Plex Mono',monospace;font-size:.76rem;line-height:1.5;resize:vertical;}
+input[type="date"]{font-family:'IBM Plex Mono',monospace;font-size:.88rem;}
+input::placeholder{color:var(--ink-faint);opacity:1;}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  border:1px solid var(--line-2);background:var(--surface-2);color:var(--ink);
+  border-radius:10px;padding:12px 14px;font-size:.8rem;letter-spacing:.03em;
+  cursor:pointer;min-height:44px;
+}
+.btn:hover{border-color:var(--ink-faint);}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent);font-weight:600;width:100%;font-size:.88rem;letter-spacing:.06em;text-transform:uppercase;}
+.btn-primary:hover{background:var(--accent-deep);border-color:var(--accent-deep);color:#fff;}
+:root[data-theme="dark"] .btn-primary:hover,
+:root:not([data-theme="light"]) .btn-primary:hover{color:var(--on-accent);}
+.btn-ghost{background:transparent;}
+.btn-sm{min-height:36px;padding:8px 11px;font-size:.72rem;}
+.btn-row{display:flex;gap:9px;}
+.btn-row .btn{flex:1;}
+.btn-yes{border-color:rgba(79,112,67,.45);background:var(--ok-soft);color:var(--ok);font-weight:600;}
+.btn-yes:hover{background:var(--ok);color:#fff;border-color:var(--ok);}
+.btn-no{border-color:rgba(168,65,42,.4);background:var(--warn-soft);color:var(--warn);font-weight:600;}
+.btn-no:hover{background:var(--warn);color:#fff;border-color:var(--warn);}
+.btn-danger{color:var(--warn);border-color:rgba(168,65,42,.4);background:transparent;}
+
+/* ---------- confidence slider ---------- */
+.conf-head{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-bottom:4px;}
+.conf-val{font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:2.6rem;line-height:.9;color:var(--accent-deep);font-variant-numeric:tabular-nums;}
+.conf-word{font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.04em;color:var(--ink-soft);text-align:right;max-width:16ch;line-height:1.35;}
+input[type="range"]{width:100%;accent-color:var(--accent-deep);height:34px;}
+.conf-scale{display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:.6rem;color:var(--ink-faint);letter-spacing:.04em;margin-top:-4px;}
+
+/* ---------- suggestion chips ---------- */
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px;}
+.chip{
+  font-size:.72rem;padding:8px 11px;border-radius:100px;
+  border:1px dashed var(--line-2);background:transparent;color:var(--ink-soft);
+  cursor:pointer;text-align:left;line-height:1.3;
+}
+.chip:hover{border-style:solid;border-color:var(--accent);color:var(--ink);background:var(--accent-soft);}
+.chips-note{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);margin-top:14px;}
+
+/* ---------- entries ---------- */
+.entry{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;box-shadow:var(--shadow);}
+.entry + .entry{margin-top:10px;}
+.entry.stale{border-color:rgba(168,65,42,.45);}
+.entry-top{display:flex;gap:10px;align-items:flex-start;}
+.entry-label{font-size:1.02rem;line-height:1.35;flex:1;}
+.entry-meta{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--ink-faint);letter-spacing:.02em;margin-top:6px;display:flex;flex-wrap:wrap;gap:4px 10px;}
+.entry-meta .who{color:var(--ink-soft);}
+.entry-meta .late{color:var(--warn);}
+.stamp{
+  flex:none;text-align:center;border:1.5px dashed var(--accent-deep);color:var(--accent-deep);
+  border-radius:7px;padding:5px 7px 4px;transform:rotate(-2.5deg);
+  font-size:.58rem;letter-spacing:.09em;line-height:1.1;text-transform:uppercase;
+}
+.stamp .n{display:block;font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:1.25rem;letter-spacing:0;transform:rotate(0);}
+.stamp.closed{border-style:solid;transform:none;}
+.stamp.closed.yes{border-color:var(--ok);color:var(--ok);}
+.stamp.closed.no{border-color:var(--warn);color:var(--warn);}
+.entry-actions{margin-top:12px;}
+.ask{font-family:'IBM Plex Mono',monospace;font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:7px;}
+.frozen{font-family:'IBM Plex Mono',monospace;font-size:.66rem;color:var(--ink-faint);display:flex;align-items:center;gap:5px;margin-top:10px;}
+
+/* ---------- banners ---------- */
+.banner{display:flex;gap:11px;border-radius:12px;padding:14px;font-size:.86rem;line-height:1.5;border:1px solid;}
+.banner .ic{flex:none;font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:1.15rem;line-height:1.1;}
+.banner-warn{background:var(--warn-soft);border-color:rgba(168,65,42,.4);color:var(--ink);}
+.banner-warn .ic{color:var(--warn);}
+.banner-note{background:var(--accent-soft);border-color:rgba(227,154,0,.4);color:var(--ink);}
+.banner-note .ic{color:var(--accent-deep);}
+.banner + *{margin-top:14px;}
+
+.empty{text-align:center;padding:34px 16px;border:1px dashed var(--line-2);border-radius:14px;color:var(--ink-soft);}
+.empty h3{font-size:1.2rem;margin-bottom:6px;color:var(--ink);}
+.empty p{font-size:.88rem;line-height:1.6;}
+
+/* ---------- calibration panel ---------- */
+.demo-flag{
+  font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--accent-deep);background:var(--accent-soft);border:1px solid rgba(227,154,0,.45);
+  border-radius:100px;padding:5px 10px;display:inline-block;margin-bottom:12px;
+}
+.verdict{font-family:'Source Serif 4',Georgia,serif;font-size:1.12rem;line-height:1.5;}
+.verdict b{font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:1.4rem;letter-spacing:.01em;}
+.verdict .up{color:var(--warn);}
+.verdict .down{color:var(--accent-deep);}
+.verdict .fine{color:var(--ok);}
+.reading{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:.95rem;color:var(--ink-soft);line-height:1.6;}
+.stat-row{display:flex;gap:10px;margin-top:14px;}
+.stat{flex:1;background:var(--surface-2);border-radius:10px;padding:11px 12px;}
+.stat .k{font-family:'IBM Plex Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);line-height:1.3;}
+.stat .v{font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:1.5rem;font-variant-numeric:tabular-nums;margin-top:3px;}
+.chart-box{margin-top:14px;}
+.chart-box svg{width:100%;height:auto;display:block;}
+.chart-legend{font-family:'IBM Plex Mono',monospace;font-size:.64rem;color:var(--ink-faint);line-height:1.5;margin-top:8px;}
+.bandrow{display:flex;align-items:baseline;gap:10px;padding:10px 0;border-top:1px solid var(--line);font-size:.86rem;}
+.bandrow:first-of-type{border-top:none;}
+.bandrow .bname{flex:1;color:var(--ink);}
+.bandrow .bnums{font-family:'IBM Plex Mono',monospace;font-size:.74rem;color:var(--ink-soft);white-space:nowrap;font-variant-numeric:tabular-nums;}
+.bandrow .bdelta{font-family:'IBM Plex Mono',monospace;font-size:.7rem;width:5.5ch;text-align:right;flex:none;}
+.bdelta.up{color:var(--warn);}
+.bdelta.down{color:var(--accent-deep);}
+.bdelta.ok{color:var(--ok);}
+
+/* ---------- history ---------- */
+.hist-row{display:flex;align-items:center;gap:10px;padding:11px 0;border-top:1px solid var(--line);font-size:.92rem;}
+.hist-row .hl{flex:1;line-height:1.35;}
+.hist-row .hl small{display:block;font-family:'IBM Plex Mono',monospace;font-size:.64rem;color:var(--ink-faint);margin-top:3px;}
+.hist-row .hc{font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--ink-soft);font-variant-numeric:tabular-nums;}
+.hist-row .ho{font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:1.05rem;width:2.2ch;text-align:center;}
+.ho.yes{color:var(--ok);} .ho.no{color:var(--warn);}
+
+/* ---------- settings ---------- */
+.role-opt{display:block;width:100%;text-align:left;border:1px solid var(--line-2);background:var(--bg);border-radius:11px;padding:13px 14px;cursor:pointer;color:var(--ink);}
+.role-opt + .role-opt{margin-top:9px;}
+.role-opt .rn{font-family:'Big Shoulders Display',sans-serif;font-weight:700;font-size:1.2rem;}
+.role-opt .rd{font-family:'Source Serif 4',serif;font-size:.84rem;color:var(--ink-soft);line-height:1.45;margin-top:2px;}
+.role-opt[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 0 0 0 1px var(--accent);}
+.sub-head{font-family:'IBM Plex Mono',monospace;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin:26px 0 10px;}
+.status-line{font-family:'IBM Plex Mono',monospace;font-size:.72rem;margin-top:10px;color:var(--ink-soft);min-height:1.2em;}
+.status-line.ok{color:var(--ok);} .status-line.bad{color:var(--warn);}
+.soon{opacity:.72;}
+.soon h4{font-size:1.15rem;}
+
+/* ---------- tab bar ---------- */
+.tabbar{
+  position:fixed;left:0;right:0;bottom:0;z-index:30;
+  background:var(--surface);box-shadow:var(--shadow-up);
+  padding:6px 10px calc(6px + env(safe-area-inset-bottom,0px));
+  display:flex;
+}
+.tabbar-inner{max-width:560px;margin:0 auto;display:flex;width:100%;}
+.tab{
+  flex:1;background:none;border:none;cursor:pointer;color:var(--ink-faint);
+  padding:8px 4px 6px;display:flex;flex-direction:column;align-items:center;gap:3px;
+  font-size:.6rem;letter-spacing:.07em;text-transform:uppercase;border-radius:10px;
+}
+.tab .gl{font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:1.2rem;line-height:1;position:relative;}
+.tab[aria-selected="true"]{color:var(--accent-deep);}
+.tab[aria-selected="true"] .gl::after{
+  content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:-5px;
+  width:16px;height:2.5px;border-radius:2px;background:var(--accent);
+}
+.badge{
+  position:absolute;top:-5px;right:-11px;background:var(--warn);color:#fff;
+  font-family:'IBM Plex Mono',monospace;font-size:.56rem;font-weight:600;
+  border-radius:100px;padding:1px 5px;line-height:1.4;
+}
+
+/* ---------- onboarding ---------- */
+.ob-scrim{position:fixed;inset:0;z-index:60;background:rgba(10,8,5,.72);display:flex;align-items:flex-end;justify-content:center;padding:16px;overflow-y:auto;}
+.ob{
+  background:var(--surface);border-radius:18px;padding:22px 20px;max-width:520px;width:100%;
+  box-shadow:0 20px 60px -20px rgba(0,0,0,.6);margin-block:auto;
+}
+.ob .k{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-deep);}
+.ob h2{font-size:1.85rem;margin:8px 0 12px;line-height:1.02;}
+.ob p{font-size:.98rem;line-height:1.6;color:var(--ink-soft);}
+.ob p + p{margin-top:10px;}
+.rule{
+  margin:16px 0;padding:14px;border-radius:12px;background:var(--bg);
+  border-left:3px solid var(--accent);
+}
+.rule .rk{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-deep);}
+.rule p{color:var(--ink);font-size:.95rem;margin-top:6px;}
+.rule em{font-style:italic;}
+
+footer.credit{
+  text-align:center;font-family:'IBM Plex Mono',monospace;font-size:.62rem;line-height:1.7;
+  color:var(--ink-faint);padding:30px 0 10px;letter-spacing:.03em;
+}
+</style>
+
+<div class="shell">
+
+  <header class="appbar">
+    <div class="wordmark">
+      <span class="w">Calib<b>ra</b></span>
+      <span class="sub">bitácora de pronósticos</span>
+    </div>
+    <button class="role-pill" id="rolePill" type="button">
+      <span class="dot" aria-hidden="true"></span><span id="rolePillText">rol</span>
+    </button>
+  </header>
+
+  <main>
+    <!-- ============ TAB 1 — REGISTRAR ============ -->
+    <section id="view-nueva" role="tabpanel" aria-labelledby="tab-nueva">
+      <div class="sec-title"><h2>Anota tu pronóstico</h2></div>
+      <div class="card">
+        <div class="field">
+          <label class="lbl" for="fLabel">¿Qué crees que va a pasar?</label>
+          <input type="text" id="fLabel" placeholder="Cumple la carga planificada de hoy" autocomplete="off" maxlength="120">
+          <div class="chips-note">Ejemplos para tu rol — toca uno o escribe el tuyo</div>
+          <div class="chips" id="sugChips"></div>
+        </div>
+
+        <div class="field">
+          <label class="lbl" for="fWho">¿Sobre quién o qué? <span style="text-transform:none;letter-spacing:0;">(opcional)</span></label>
+          <input type="text" id="fWho" placeholder="Camila · grupo 10B · cliente de las 6 a.m." autocomplete="off" maxlength="60">
+        </div>
+
+        <div class="field">
+          <span class="lbl">¿Qué tan seguro estás?</span>
+          <div class="conf-head">
+            <span class="conf-val" id="confVal">70%</span>
+            <span class="conf-word" id="confWord"></span>
+          </div>
+          <input type="range" id="fConf" min="0" max="100" step="5" value="70" aria-label="Nivel de confianza en porcentaje">
+          <div class="conf-scale"><span>0 · no pasa</span><span>50 · moneda al aire</span><span>100 · seguro</span></div>
+        </div>
+
+        <div class="field">
+          <label class="lbl" for="fDate">¿Cuándo vas a saber si pasó?</label>
+          <input type="date" id="fDate">
+        </div>
+
+        <button class="btn btn-primary" id="saveBtn" type="button">Guardar como pendiente</button>
+        <div class="status-line" id="saveStatus" role="status"></div>
+      </div>
+
+      <div class="card">
+        <p class="hint"><strong>Por qué queda pendiente:</strong> el resultado se registra después, en la pestaña Pendientes. Este número de confianza ya no se puede cambiar — es lo que hace que la comparación sirva.</p>
+      </div>
+    </section>
+
+    <!-- ============ TAB 2 — PENDIENTES ============ -->
+    <section id="view-pendientes" role="tabpanel" aria-labelledby="tab-pendientes" hidden>
+      <div class="sec-title"><h2>Pendientes</h2><span class="count" id="pendCount"></span></div>
+      <div id="staleBanner"></div>
+      <div id="pendList"></div>
+
+      <div class="sec-title"><h2>Ya cerradas</h2><span class="count" id="histCount"></span></div>
+      <div id="histBox"></div>
+    </section>
+
+    <!-- ============ TAB 3 — CALIBRACIÓN ============ -->
+    <section id="view-calibracion" role="tabpanel" aria-labelledby="tab-calibracion" hidden>
+      <div class="sec-title"><h2>Tu calibración</h2><span class="count" id="calCount"></span></div>
+      <div id="calBox"></div>
+    </section>
+
+    <!-- ============ TAB 4 — AJUSTES ============ -->
+    <section id="view-ajustes" role="tabpanel" aria-labelledby="tab-ajustes" hidden>
+      <div class="sec-title"><h2>Ajustes</h2></div>
+
+      <div class="sub-head" style="margin-top:0;">Tu rol</div>
+      <div id="roleOpts"></div>
+
+      <div class="sub-head">Tus datos</div>
+      <div class="card">
+        <p class="hint">Todo se guarda solo en este dispositivo, en este navegador. No hay cuenta ni servidor: si cambias de teléfono o limpias el navegador, los datos se van contigo solo si los copias desde aquí.</p>
+        <div class="btn-row" style="margin-top:14px;">
+          <button class="btn btn-sm" id="expBtn" type="button">Copiar respaldo</button>
+          <button class="btn btn-sm" id="dlBtn" type="button">Descargar archivo</button>
+        </div>
+        <textarea id="expBox" rows="4" readonly aria-label="Respaldo de tus datos en texto" style="margin-top:11px;"></textarea>
+        <div class="status-line" id="expStatus" role="status"></div>
+
+        <div class="sub-head" style="margin-top:20px;">Traer un respaldo</div>
+        <p class="hint">Pega el texto del respaldo, o carga el archivo que descargaste. Se suman a lo que ya tengas, sin duplicar.</p>
+        <textarea id="impBox" rows="3" placeholder='{"app":"calibra", ...}' aria-label="Pega aquí tu respaldo"></textarea>
+        <div class="btn-row" style="margin-top:9px;">
+          <button class="btn btn-sm" id="impBtn" type="button">Importar pegado</button>
+          <label class="btn btn-sm" for="impFile" style="margin:0;">Cargar archivo<input type="file" id="impFile" accept=".json,application/json,text/plain" hidden></label>
+        </div>
+        <div class="status-line" id="impStatus" role="status"></div>
+      </div>
+
+      <div class="sub-head">Otras opciones</div>
+      <div class="card">
+        <div class="btn-row">
+          <button class="btn btn-sm btn-ghost" id="obBtn" type="button">Ver la introducción</button>
+          <button class="btn btn-sm btn-danger" id="wipeBtn" type="button">Borrar todo</button>
+        </div>
+        <div class="status-line" id="wipeStatus" role="status"></div>
+      </div>
+
+      <div class="sub-head">Próximamente</div>
+      <div class="card soon">
+        <h4>Modo sala</h4>
+        <p class="hint" style="margin-top:6px;">Una sesión compartida donde un cuerpo técnico o un departamento de educación física pronostica en conjunto y ve su calibración agregada. Queda para una segunda versión: esta es la herramienta personal, de bolsillo.</p>
+      </div>
+
+      <footer class="credit">
+        Calibra · artefacto de la conferencia «Del cronómetro al algoritmo»<br>
+        Dr. Darío Mendoza Romero · UPTC Chiquinquirá, 2026<br>
+        La cifra de carga sugerida es el RPE de sesión (Foster, 2001): esfuerzo percibido 0-10 × minutos.
+      </footer>
+    </section>
+  </main>
+</div>
+
+<nav class="tabbar" role="tablist" aria-label="Secciones">
+  <div class="tabbar-inner">
+    <button class="tab" id="tab-nueva" role="tab" aria-selected="true" aria-controls="view-nueva" data-view="nueva"><span class="gl">+</span>Anotar</button>
+    <button class="tab" id="tab-pendientes" role="tab" aria-selected="false" aria-controls="view-pendientes" data-view="pendientes"><span class="gl">◷<span class="badge" id="pendBadge" hidden>0</span></span>Pendientes</button>
+    <button class="tab" id="tab-calibracion" role="tab" aria-selected="false" aria-controls="view-calibracion" data-view="calibracion"><span class="gl">◑</span>Calibración</button>
+    <button class="tab" id="tab-ajustes" role="tab" aria-selected="false" aria-controls="view-ajustes" data-view="ajustes"><span class="gl">≡</span>Ajustes</button>
+  </div>
+</nav>
+
+<div class="ob-scrim" id="obScrim" hidden>
+  <div class="ob" role="dialog" aria-modal="true" aria-labelledby="obTitle">
+    <p class="k">Del cronómetro al algoritmo · el artefacto que te llevas</p>
+    <h2 id="obTitle">Tu intuición no aprende sola</h2>
+    <p>Cada semana pronosticas: que este deportista cumple la carga, que esta atleta baja su marca, que este estudiante no mejora. Casi nunca lo escribes antes, y casi nunca lo comparas después.</p>
+    <p>Sin ese contraste la intuición no mejora: solo se siente cada vez más segura. La memoria es generosa con nosotros y recuerda mejor los aciertos que los fallos.</p>
+    <p>Calibra hace una sola cosa: guarda lo que creías <em>antes</em>, y te lo devuelve cuando ya sabes qué pasó.</p>
+
+    <div class="rule">
+      <div class="rk">Regla única</div>
+      <p>El pronóstico se anota antes de saber el resultado y la confianza queda congelada. <em>Si se anota después, ya no es un pronóstico: es una excusa.</em></p>
+    </div>
+
+    <p class="hint" style="margin-bottom:12px;">Es el mismo ciclo del RPE de sesión que vimos en la charla: lo que esperabas (400), lo que realmente pasó (250), y tu nueva expectativa para la próxima (385). Aquí lo haces con tu propio criterio en vez de con una cifra de carga.</p>
+
+    <div class="sub-head" style="margin-top:18px;">¿Cuál es tu trabajo?</div>
+    <div id="obRoles"></div>
+    <button class="btn btn-primary" id="obStart" type="button" style="margin-top:14px;">Empezar</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ======================= datos de configuración ======================= */
+  var ROLES = {
+    deportivo:{
+      name:'Entrenador deportivo',
+      desc:'Equipo o deportista en proceso de entrenamiento.',
+      short:'entrenador deportivo',
+      sug:[
+        'Cumple la carga planificada de hoy',
+        'Reporta un RPE de sesión más bajo de lo previsto',
+        'Baja su marca personal este mes',
+        'Llega a la sesión del sábado',
+        'Termina la serie 4 sin caída de técnica'
+      ]
+    },
+    gimnasio:{
+      name:'Entrenador de gimnasio',
+      desc:'Clientes que entrenan por salud, estética o rendimiento.',
+      short:'entrenador de gimnasio',
+      sug:[
+        'Completa las 3 sesiones de esta semana',
+        'Sostiene la técnica en la última serie',
+        'Vuelve después del festivo',
+        'Sube de carga sin dolor esta semana',
+        'Sigue viniendo dentro de un mes'
+      ]
+    },
+    docente:{
+      name:'Profesor de educación física',
+      desc:'Clases, grupos y estudiantes en el colegio o la universidad.',
+      short:'profe de EF',
+      sug:[
+        'Logra el objetivo motor de la clase de hoy',
+        'El grupo participa sin que haya que insistir',
+        'Mejora su marca en el test de este mes',
+        'Entrega el trabajo del periodo a tiempo',
+        'La clase de la lluvia no se desordena'
+      ]
+    }
+  };
+
+  var BANDS = [
+    {lo:0,  hi:20,  label:'Casi seguro que no'},
+    {lo:20, hi:40,  label:'Poco probable'},
+    {lo:40, hi:60,  label:'Moneda al aire'},
+    {lo:60, hi:80,  label:'Probable'},
+    {lo:80, hi:101, label:'Casi seguro que sí'}
+  ];
+
+  /* datos claramente ilustrativos: solo alimentan el panel de ejemplo,
+     nunca se mezclan con lo que registra la persona */
+  var DEMO = [
+    {conf:85,ok:true},{conf:90,ok:true},{conf:80,ok:false},{conf:75,ok:true},
+    {conf:95,ok:true},{conf:85,ok:false},{conf:70,ok:true},{conf:60,ok:true},
+    {conf:90,ok:false},{conf:55,ok:true},{conf:65,ok:false},{conf:80,ok:true},
+    {conf:75,ok:false},{conf:85,ok:true},{conf:50,ok:true},{conf:95,ok:false},
+    {conf:30,ok:false},{conf:40,ok:true},{conf:25,ok:false},{conf:70,ok:false}
+  ];
+
+  var MIN_CIERRES = 5;
+  var STALE_DAYS = 7;
+  var KEY = 'calibra.v1';
+
+  /* ======================= estado ======================= */
+  var state = {v:1, role:null, onboarded:false, items:[]};
+
+  function load(){
+    try{
+      var raw = localStorage.getItem(KEY);
+      if(!raw) return;
+      var p = JSON.parse(raw);
+      if(p && typeof p === 'object'){
+        if(p.role && ROLES[p.role]) state.role = p.role;
+        state.onboarded = !!p.onboarded;
+        if(Array.isArray(p.items)) state.items = p.items.filter(validItem);
+      }
+    }catch(e){ /* navegador sin almacenamiento: seguimos en memoria */ }
+  }
+  function save(){
+    try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){}
+  }
+  function validItem(it){
+    return it && typeof it.id === 'string' && typeof it.label === 'string'
+      && typeof it.conf === 'number' && it.conf >= 0 && it.conf <= 100;
+  }
+  function uid(){
+    return 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2,7);
+  }
+
+  /* ======================= utilidades ======================= */
+  var $ = function(id){ return document.getElementById(id); };
+  function esc(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+  function todayISO(){
+    var d = new Date(), m = d.getMonth()+1, day = d.getDate();
+    return d.getFullYear() + '-' + (m<10?'0':'') + m + '-' + (day<10?'0':'') + day;
+  }
+  function daysSince(iso){
+    if(!iso) return 0;
+    var t = new Date(iso + 'T12:00:00').getTime();
+    if(isNaN(t)) return 0;
+    return Math.floor((Date.now() - t) / 86400000);
+  }
+  function fechaCorta(iso){
+    if(!iso) return '';
+    var p = iso.split('-');
+    if(p.length !== 3) return iso;
+    var meses = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+    return parseInt(p[2],10) + ' ' + (meses[parseInt(p[1],10)-1] || '') + ' ' + p[0];
+  }
+  function cuando(iso){
+    var d = daysSince(iso);
+    if(d === 0) return 'hoy';
+    if(d === 1) return 'ayer';
+    if(d === -1) return 'mañana';
+    if(d < 0) return 'en ' + Math.abs(d) + ' días';
+    return 'hace ' + d + ' días';
+  }
+  function confWord(v){
+    if(v <= 10) return 'casi imposible';
+    if(v <= 30) return 'poco probable';
+    if(v <= 45) return 'más bien no';
+    if(v <= 55) return 'moneda al aire';
+    if(v <= 70) return 'probable';
+    if(v <= 89) return 'bastante seguro';
+    if(v <= 97) return 'casi seguro';
+    return 'seguro — cuidado con los 100%';
+  }
+
+  /* ======================= navegación ======================= */
+  var views = ['nueva','pendientes','calibracion','ajustes'];
+  var current = 'nueva';
+  function go(view){
+    current = view;
+    views.forEach(function(v){
+      $('view-' + v).hidden = (v !== view);
+      var t = $('tab-' + v);
+      t.setAttribute('aria-selected', v === view ? 'true' : 'false');
+    });
+    if(view === 'calibracion') renderCal();
+    if(view === 'pendientes') renderPend();
+    if(view === 'ajustes') renderAjustes();
+    window.scrollTo(0,0);
+  }
+  document.querySelectorAll('.tab').forEach(function(t){
+    t.addEventListener('click', function(){ go(t.dataset.view); });
+  });
+  $('rolePill').addEventListener('click', function(){ go('ajustes'); });
+
+  /* ======================= onboarding ======================= */
+  var obRoleSel = null;
+  function renderObRoles(){
+    var box = $('obRoles');
+    box.innerHTML = '';
+    Object.keys(ROLES).forEach(function(k){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'role-opt';
+      b.setAttribute('aria-pressed', String(obRoleSel === k));
+      b.innerHTML = '<span class="rn">' + esc(ROLES[k].name) + '</span><span class="rd">' + esc(ROLES[k].desc) + '</span>';
+      b.addEventListener('click', function(){ obRoleSel = k; renderObRoles(); });
+      box.appendChild(b);
+    });
+  }
+  function openOb(){
+    obRoleSel = state.role;
+    renderObRoles();
+    $('obScrim').hidden = false;
+  }
+  $('obStart').addEventListener('click', function(){
+    state.role = obRoleSel || 'deportivo';
+    state.onboarded = true;
+    save();
+    $('obScrim').hidden = true;
+    renderRole();
+    renderChips();
+  });
+  $('obBtn').addEventListener('click', openOb);
+
+  /* ======================= rol ======================= */
+  function renderRole(){
+    var r = state.role && ROLES[state.role] ? ROLES[state.role] : ROLES.deportivo;
+    $('rolePillText').textContent = r.short;
+  }
+  function renderChips(){
+    var r = state.role && ROLES[state.role] ? ROLES[state.role] : ROLES.deportivo;
+    var box = $('sugChips');
+    box.innerHTML = '';
+    r.sug.forEach(function(s){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'chip';
+      b.textContent = s;
+      b.addEventListener('click', function(){
+        $('fLabel').value = s;
+        $('fLabel').focus();
+      });
+      box.appendChild(b);
+    });
+    $('fLabel').placeholder = r.sug[0];
+  }
+  function renderRoleOpts(){
+    var box = $('roleOpts');
+    box.innerHTML = '';
+    Object.keys(ROLES).forEach(function(k){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'role-opt';
+      b.setAttribute('aria-pressed', String(state.role === k));
+      b.innerHTML = '<span class="rn">' + esc(ROLES[k].name) + '</span><span class="rd">' + esc(ROLES[k].desc) + '</span>';
+      b.addEventListener('click', function(){
+        state.role = k; save(); renderRole(); renderChips(); renderRoleOpts();
+      });
+      box.appendChild(b);
+    });
+  }
+
+  /* ======================= registrar ======================= */
+  var fConf = $('fConf');
+  function renderConf(){
+    var v = parseInt(fConf.value, 10);
+    $('confVal').textContent = v + '%';
+    $('confWord').textContent = confWord(v);
+  }
+  fConf.addEventListener('input', renderConf);
+
+  $('saveBtn').addEventListener('click', function(){
+    var label = $('fLabel').value.trim();
+    var st = $('saveStatus');
+    if(!label){
+      st.textContent = 'Escribe en una línea qué crees que va a pasar.';
+      st.className = 'status-line bad';
+      $('fLabel').focus();
+      return;
+    }
+    state.items.push({
+      id: uid(),
+      label: label,
+      who: $('fWho').value.trim(),
+      conf: parseInt(fConf.value, 10),
+      date: $('fDate').value || todayISO(),
+      createdAt: new Date().toISOString(),
+      status: 'pendiente',
+      outcome: null,
+      closedAt: null
+    });
+    save();
+    $('fLabel').value = '';
+    $('fWho').value = '';
+    fConf.value = 70;
+    renderConf();
+    $('fDate').value = todayISO();
+    st.textContent = 'Guardada. Vuelve cuando sepas qué pasó.';
+    st.className = 'status-line ok';
+    renderBadge();
+  });
+
+  /* ======================= pendientes ======================= */
+  function pendientes(){
+    return state.items.filter(function(i){ return i.status === 'pendiente'; })
+      .sort(function(a,b){ return (a.date||'') < (b.date||'') ? -1 : 1; });
+  }
+  function cerradas(){
+    return state.items.filter(function(i){ return i.status === 'cerrada'; })
+      .sort(function(a,b){ return (b.closedAt||'') < (a.closedAt||'') ? -1 : 1; });
+  }
+
+  function renderBadge(){
+    var n = pendientes().length;
+    var b = $('pendBadge');
+    b.textContent = n;
+    b.hidden = n === 0;
+  }
+
+  function renderPend(){
+    var list = pendientes(), box = $('pendList');
+    $('pendCount').textContent = list.length ? list.length + (list.length === 1 ? ' abierta' : ' abiertas') : '';
+    box.innerHTML = '';
+
+    var stale = list.filter(function(i){ return daysSince(i.date) > STALE_DAYS; });
+    $('staleBanner').innerHTML = stale.length
+      ? '<div class="banner banner-warn"><span class="ic">◷</span><span><strong>' + stale.length +
+        (stale.length === 1 ? ' pronóstico lleva' : ' pronósticos llevan') + ' más de una semana sin cerrar.</strong> ' +
+        'El hábito no es pronosticar: es pronosticar y después comparar. Ciérralos aunque el resultado no te guste.</span></div>'
+      : '';
+
+    if(!list.length){
+      box.innerHTML = '<div class="empty"><h3>Nada pendiente</h3><p>Cuando anotes un pronóstico aparecerá aquí, esperando a que sepas qué pasó.</p></div>';
+      renderHist();
+      return;
+    }
+
+    list.forEach(function(it){
+      var late = daysSince(it.date) > STALE_DAYS;
+      var el = document.createElement('article');
+      el.className = 'entry' + (late ? ' stale' : '');
+      el.innerHTML =
+        '<div class="entry-top">' +
+          '<div class="entry-label">' + esc(it.label) + '</div>' +
+          '<div class="stamp"><span class="n">' + it.conf + '%</span>pendiente</div>' +
+        '</div>' +
+        '<div class="entry-meta">' +
+          (it.who ? '<span class="who">' + esc(it.who) + '</span>' : '') +
+          '<span>' + esc(fechaCorta(it.date)) + '</span>' +
+          '<span class="' + (late ? 'late' : '') + '">' + esc(cuando(it.date)) + '</span>' +
+        '</div>' +
+        '<div class="entry-actions">' +
+          '<div class="ask">¿Qué pasó?</div>' +
+          '<div class="btn-row">' +
+            '<button class="btn btn-sm btn-yes" data-act="yes">Sí ocurrió</button>' +
+            '<button class="btn btn-sm btn-no" data-act="no">No ocurrió</button>' +
+            '<button class="btn btn-sm btn-ghost" data-act="del" style="flex:0 0 auto;">Borrar</button>' +
+          '</div>' +
+        '</div>';
+
+      el.querySelector('[data-act="yes"]').addEventListener('click', function(){ close(it.id, true); });
+      el.querySelector('[data-act="no"]').addEventListener('click', function(){ close(it.id, false); });
+      var del = el.querySelector('[data-act="del"]');
+      del.addEventListener('click', function(){
+        if(del.dataset.armed === '1'){ remove(it.id); return; }
+        del.dataset.armed = '1';
+        del.textContent = '¿Seguro?';
+        del.classList.add('btn-danger');
+        setTimeout(function(){
+          if(del.dataset.armed === '1'){ del.dataset.armed = '0'; del.textContent = 'Borrar'; del.classList.remove('btn-danger'); }
+        }, 4000);
+      });
+      box.appendChild(el);
+    });
+    renderHist();
+  }
+
+  function close(id, ok){
+    var it = state.items.filter(function(x){ return x.id === id; })[0];
+    if(!it || it.status === 'cerrada') return;   /* la confianza nunca se toca aquí */
+    it.status = 'cerrada';
+    it.outcome = !!ok;
+    it.closedAt = new Date().toISOString();
+    save();
+    renderPend();
+    renderBadge();
+  }
+  function remove(id){
+    state.items = state.items.filter(function(x){ return x.id !== id; });
+    save();
+    renderPend();
+    renderBadge();
+  }
+
+  function renderHist(){
+    var list = cerradas(), box = $('histBox');
+    $('histCount').textContent = list.length ? list.length + (list.length === 1 ? ' cerrada' : ' cerradas') : '';
+    if(!list.length){
+      box.innerHTML = '<div class="empty"><p>Todavía no has cerrado ninguna. La primera vez que marques un resultado empieza tu historial.</p></div>';
+      return;
+    }
+    var html = '<div class="card">';
+    list.slice(0, 40).forEach(function(it){
+      html += '<div class="hist-row">' +
+        '<span class="ho ' + (it.outcome ? 'yes' : 'no') + '" aria-hidden="true">' + (it.outcome ? '✓' : '✗') + '</span>' +
+        '<span class="hl">' + esc(it.label) +
+          '<small>' + (it.who ? esc(it.who) + ' · ' : '') + esc(fechaCorta(it.date)) +
+          ' · ' + (it.outcome ? 'ocurrió' : 'no ocurrió') + '</small></span>' +
+        '<span class="hc">' + it.conf + '%</span>' +
+      '</div>';
+    });
+    html += '<div class="frozen"><span aria-hidden="true">🔒</span> La confianza de una predicción cerrada queda congelada: no se puede editar.</div>';
+    if(list.length > 40) html += '<div class="chips-note">Mostrando las 40 más recientes de ' + list.length + '.</div>';
+    html += '</div>';
+    box.innerHTML = html;
+  }
+
+  /* ======================= calibración ======================= */
+  function analiza(data){
+    var n = data.length;
+    if(!n) return null;
+    var sumPred = 0, hits = 0;
+    data.forEach(function(e){ sumPred += e.conf; if(e.ok) hits++; });
+    var meanPred = sumPred / n;
+    var observed = hits / n * 100;
+    var bands = BANDS.map(function(b){
+      var inb = data.filter(function(e){ return e.conf >= b.lo && e.conf < b.hi; });
+      if(!inb.length) return null;
+      var mp = inb.reduce(function(s,e){ return s + e.conf; }, 0) / inb.length;
+      var h = inb.filter(function(e){ return e.ok; }).length;
+      return {label:b.label, lo:b.lo, hi:Math.min(b.hi,100), n:inb.length, hits:h, pred:mp, obs:h / inb.length * 100};
+    }).filter(Boolean);
+    return {n:n, hits:hits, meanPred:meanPred, observed:observed, gap:meanPred - observed, bands:bands};
+  }
+
+  function chartSVG(a){
+    var W = 320, H = 300, padL = 44, padR = 14, padT = 14, padB = 46;
+    var w = W - padL - padR, h = H - padT - padB;
+    function X(v){ return padL + (v / 100) * w; }
+    function Y(v){ return padT + h - (v / 100) * h; }
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Comparación entre qué tan seguro estabas y con qué frecuencia ocurrió, por banda de confianza. La diagonal marca la calibración perfecta.">';
+    /* rejilla */
+    [0,25,50,75,100].forEach(function(v){
+      s += '<line x1="' + X(v) + '" y1="' + Y(0) + '" x2="' + X(v) + '" y2="' + Y(100) + '" stroke="currentColor" stroke-opacity=".08"/>';
+      s += '<line x1="' + X(0) + '" y1="' + Y(v) + '" x2="' + X(100) + '" y2="' + Y(v) + '" stroke="currentColor" stroke-opacity=".08"/>';
+      s += '<text x="' + X(v) + '" y="' + (Y(0) + 15) + '" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="currentColor" fill-opacity=".55">' + v + '</text>';
+      s += '<text x="' + (X(0) - 7) + '" y="' + (Y(v) + 3) + '" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="currentColor" fill-opacity=".55">' + v + '</text>';
+    });
+    /* ejes */
+    s += '<line x1="' + X(0) + '" y1="' + Y(0) + '" x2="' + X(100) + '" y2="' + Y(0) + '" stroke="currentColor" stroke-opacity=".3"/>';
+    s += '<line x1="' + X(0) + '" y1="' + Y(0) + '" x2="' + X(0) + '" y2="' + Y(100) + '" stroke="currentColor" stroke-opacity=".3"/>';
+    /* diagonal */
+    s += '<line x1="' + X(0) + '" y1="' + Y(0) + '" x2="' + X(100) + '" y2="' + Y(100) + '" stroke="currentColor" stroke-opacity=".35" stroke-dasharray="4,4"/>';
+    s += '<text x="' + X(63) + '" y="' + (Y(63) - 7) + '" font-family="IBM Plex Mono, monospace" font-size="8" fill="currentColor" fill-opacity=".55" stroke="var(--surface)" stroke-width="2.6" paint-order="stroke" transform="rotate(-' + Math.round(Math.atan2(h,w) * 180 / Math.PI) + ' ' + X(63) + ' ' + (Y(63) - 7) + ')">calibración perfecta</text>';
+    /* línea que une los puntos */
+    if(a.bands.length > 1){
+      var pts = a.bands.map(function(b){ return X(b.pred) + ',' + Y(b.obs); }).join(' ');
+      s += '<polyline points="' + pts + '" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-opacity=".55"/>';
+    }
+    /* puntos */
+    a.bands.forEach(function(b){
+      var r = 4 + Math.min(Math.sqrt(b.n) * 2.2, 8);
+      s += '<circle cx="' + X(b.pred) + '" cy="' + Y(b.obs) + '" r="' + r.toFixed(1) + '" fill="var(--accent-deep)" fill-opacity=".9"/>';
+      s += '<circle cx="' + X(b.pred) + '" cy="' + Y(b.obs) + '" r="' + r.toFixed(1) + '" fill="none" stroke="var(--surface)" stroke-width="1.2"/>';
+    });
+    /* rótulos de eje */
+    s += '<text x="' + (padL + w / 2) + '" y="' + (H - 8) + '" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="currentColor" fill-opacity=".7">qué tan seguro estabas (%)</text>';
+    s += '<text x="12" y="' + (padT + h / 2) + '" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="currentColor" fill-opacity=".7" transform="rotate(-90 12 ' + (padT + h / 2) + ')">cuántas veces ocurrió (%)</text>';
+    s += '</svg>';
+    return s;
+  }
+
+  function veredicto(a){
+    var g = a.gap, abs = Math.abs(g).toFixed(0);
+    if(Math.abs(g) < 5){
+      return '<span class="fine"><b>Estás bien calibrado.</b></span> Lo que dices y lo que pasa van casi a la par: dices ' +
+        a.meanPred.toFixed(0) + '% en promedio y ocurre el ' + a.observed.toFixed(0) + '% de las veces.';
+    }
+    if(g > 0){
+      return '<span class="up"><b>Tiendes a sobreestimar, ~' + abs + ' puntos.</b></span> Dices ' +
+        a.meanPred.toFixed(0) + '% en promedio, y las cosas ocurren el ' + a.observed.toFixed(0) + '% de las veces.';
+    }
+    return '<span class="down"><b>Tiendes a subestimar, ~' + abs + ' puntos.</b></span> Dices ' +
+      a.meanPred.toFixed(0) + '% en promedio, y las cosas ocurren el ' + a.observed.toFixed(0) + '% de las veces.';
+  }
+
+  function lectura(a){
+    /* una frase práctica, apoyada en la banda más poblada */
+    var top = a.bands.slice().sort(function(x,y){ return y.n - x.n; })[0];
+    var g = a.gap;
+    var frase;
+    if(Math.abs(g) < 5){
+      frase = 'Cuando pones un número, ese número significa algo. Sigue anotando: la calibración se mantiene con el hábito, no se consigue una vez.';
+    } else if(g > 0){
+      frase = 'Cuando digas que estás ' + Math.round(top.pred) + '% seguro, en la práctica aciertas menos que eso — conviene bajar un poco la confianza cuando el número se sienta así de alto.';
+    } else {
+      frase = 'Te estás quedando corto: cuando digas ' + Math.round(top.pred) + '% podrías subirle, porque en la práctica pasa más de lo que anuncias. Tu criterio es mejor de lo que le reconoces.';
+    }
+    var extra = '';
+    var alto = a.bands.filter(function(b){ return b.lo >= 80; })[0];
+    if(alto && alto.n >= 3 && alto.pred - alto.obs > 12){
+      extra = ' Ojo con tus \u00abcasi seguro\u00bb: de ' + alto.n + ' veces que lo dijiste, ocurrió ' + alto.hits + '.';
+    }
+    return frase + extra;
+  }
+
+  function panelHTML(a, esDemo){
+    var html = '<div class="card">';
+    if(esDemo) html += '<span class="demo-flag">ejemplo ilustrativo · no son tus datos</span>';
+    html += '<p class="verdict">' + veredicto(a) + '</p>';
+    html += '<p class="reading">' + lectura(a) + '</p>';
+    html += '<div class="stat-row">' +
+      '<div class="stat"><div class="k">cerradas</div><div class="v">' + a.n + '</div></div>' +
+      '<div class="stat"><div class="k">dices en promedio</div><div class="v">' + a.meanPred.toFixed(0) + '%</div></div>' +
+      '<div class="stat"><div class="k">ocurre de verdad</div><div class="v">' + a.observed.toFixed(0) + '%</div></div>' +
+    '</div>';
+    html += '<div class="chart-box">' + chartSVG(a) + '</div>';
+    html += '<p class="chart-legend">Cada punto es un grupo de tus pronósticos según qué tan seguro estabas. Sobre la línea punteada, tu confianza coincide con la realidad; por debajo, prometes más de lo que pasa; por encima, pasa más de lo que prometes. Los puntos más grandes son los que tienen más registros detrás.</p>';
+    html += '</div>';
+
+    html += '<div class="card"><h3 style="font-size:1.25rem;margin-bottom:4px;">Banda por banda</h3>' +
+      '<p class="hint" style="margin-bottom:10px;">Lo que dijiste, frente a lo que pasó.</p>';
+    a.bands.forEach(function(b){
+      var d = b.pred - b.obs;
+      var cls = Math.abs(d) < 8 ? 'ok' : (d > 0 ? 'up' : 'down');
+      var sign = d > 0 ? '+' : (d < 0 ? '−' : '');
+      html += '<div class="bandrow">' +
+        '<span class="bname">' + esc(b.label) + ' <span style="color:var(--ink-faint);font-family:\'IBM Plex Mono\',monospace;font-size:.72rem;">' + b.lo + '-' + b.hi + '%</span></span>' +
+        '<span class="bnums">ocurrió ' + b.hits + ' de ' + b.n + '</span>' +
+        '<span class="bdelta ' + cls + '">' + sign + Math.abs(Math.round(d)) + '</span>' +
+      '</div>';
+    });
+    html += '<p class="chips-note">La última columna es la diferencia en puntos entre lo que dijiste y lo que pasó.</p></div>';
+    return html;
+  }
+
+  function renderCal(){
+    var data = cerradas().map(function(i){ return {conf:i.conf, ok:i.outcome}; });
+    var box = $('calBox');
+    $('calCount').textContent = data.length ? data.length + ' cerradas' : '';
+
+    if(data.length < MIN_CIERRES){
+      var faltan = MIN_CIERRES - data.length;
+      var html = '<div class="banner banner-note"><span class="ic">◑</span><span>' +
+        (data.length === 0
+          ? 'Tu panel se llena solo, con cada pronóstico que cierres. '
+          : 'Llevas ' + data.length + (data.length === 1 ? ' pronóstico cerrado' : ' pronósticos cerrados') + '. ') +
+        '<strong>Faltan ' + faltan + (faltan === 1 ? ' cierre' : ' cierres') + '</strong> para que el cálculo diga algo que valga la pena. Mientras tanto, así se ve el panel con el historial de alguien que ya lleva un rato.</span></div>';
+      var demo = analiza(DEMO);
+      box.innerHTML = html + panelHTML(demo, true);
+      return;
+    }
+    box.innerHTML = panelHTML(analiza(data), false);
+  }
+
+  /* ======================= ajustes: datos ======================= */
+  function renderAjustes(){
+    renderRoleOpts();
+    $('expBox').value = JSON.stringify({app:'calibra', v:1, exportado:new Date().toISOString(), role:state.role, items:state.items});
+  }
+
+  $('expBtn').addEventListener('click', function(){
+    var ta = $('expBox'), st = $('expStatus');
+    ta.select();
+    var done = false;
+    try{ done = document.execCommand('copy'); }catch(e){}
+    if(!done && navigator.clipboard){
+      navigator.clipboard.writeText(ta.value).then(function(){
+        st.textContent = 'Copiado. Pégalo en una nota, un correo o un chat contigo mismo.';
+        st.className = 'status-line ok';
+      }, function(){
+        st.textContent = 'No pude copiarlo solo: selecciona el texto de abajo y cópialo a mano.';
+        st.className = 'status-line bad';
+      });
+      return;
+    }
+    st.textContent = done
+      ? 'Copiado. Pégalo en una nota, un correo o un chat contigo mismo.'
+      : 'Selecciona el texto de abajo y cópialo a mano.';
+    st.className = 'status-line ' + (done ? 'ok' : 'bad');
+  });
+
+  /* descarga: en claude.ai la guarda el visor (capacidad downloads);
+     en una copia local del archivo, un enlace normal */
+  var dlCap = null, dlAsked = false;
+  if(window.claude && typeof window.claude.use === 'function'){
+    dlAsked = true;
+    try{
+      window.claude.use('downloads').then(function(d){ dlCap = d; }, function(){ dlCap = null; });
+    }catch(e){ dlAsked = false; }
+  }
+  function descargaLocal(text, st){
+    try{
+      var blob = new Blob([text], {type:'application/json'});
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = 'calibra-' + todayISO() + '.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
+      st.textContent = 'Si no apareció ninguna descarga, usa «Copiar respaldo».';
+      st.className = 'status-line';
+    }catch(e){
+      st.textContent = 'Este navegador no permite descargar aquí. Usa «Copiar respaldo».';
+      st.className = 'status-line bad';
+    }
+  }
+  $('dlBtn').addEventListener('click', function(){
+    var st = $('expStatus');
+    var text = $('expBox').value;
+    if(dlCap && typeof dlCap.save === 'function'){
+      st.textContent = 'Preparando el archivo…';
+      st.className = 'status-line';
+      dlCap.save({filename:'calibra-' + todayISO() + '.json', data:text}).then(function(){
+        st.textContent = 'Archivo guardado. Ese es tu respaldo completo.';
+        st.className = 'status-line ok';
+      }, function(err){
+        var code = err && err.code;
+        if(code === 'declined'){
+          st.textContent = 'Descarga cancelada.';
+          st.className = 'status-line';
+        }else{
+          st.textContent = 'No se pudo descargar aquí. Usa «Copiar respaldo» y pega el texto donde quieras guardarlo.';
+          st.className = 'status-line bad';
+        }
+      });
+      return;
+    }
+    if(dlAsked && dlCap === null){
+      /* la capacidad todavía no respondió, o esta vista no la permite */
+      descargaLocal(text, st);
+      return;
+    }
+    descargaLocal(text, st);
+  });
+
+  function importar(text){
+    var st = $('impStatus');
+    var p;
+    try{ p = JSON.parse(text); }
+    catch(e){
+      st.textContent = 'Ese texto no es un respaldo de Calibra. Pega el contenido completo, desde la primera llave.';
+      st.className = 'status-line bad';
+      return;
+    }
+    var incoming = (p && Array.isArray(p.items)) ? p.items.filter(validItem) : null;
+    if(!incoming){
+      st.textContent = 'No encontré predicciones en ese respaldo.';
+      st.className = 'status-line bad';
+      return;
+    }
+    var have = {};
+    state.items.forEach(function(i){ have[i.id] = true; });
+    var add = 0;
+    incoming.forEach(function(i){
+      if(have[i.id]) return;
+      if(i.status !== 'cerrada') i.status = 'pendiente';
+      if(i.status === 'pendiente'){ i.outcome = null; i.closedAt = null; }
+      state.items.push(i);
+      have[i.id] = true;
+      add++;
+    });
+    if(p.role && ROLES[p.role] && !state.role) state.role = p.role;
+    state.onboarded = true;
+    save();
+    renderRole(); renderChips(); renderBadge(); renderAjustes();
+    $('impBox').value = '';
+    st.textContent = add
+      ? 'Listo: ' + add + (add === 1 ? ' predicción añadida.' : ' predicciones añadidas.')
+      : 'Ese respaldo ya estaba completo aquí: no había nada nuevo que añadir.';
+    st.className = 'status-line ok';
+  }
+
+  $('impBtn').addEventListener('click', function(){
+    var t = $('impBox').value.trim();
+    if(!t){
+      $('impStatus').textContent = 'Pega primero el texto del respaldo.';
+      $('impStatus').className = 'status-line bad';
+      return;
+    }
+    importar(t);
+  });
+  $('impFile').addEventListener('change', function(ev){
+    var f = ev.target.files && ev.target.files[0];
+    if(!f) return;
+    var fr = new FileReader();
+    fr.onload = function(){ importar(String(fr.result)); };
+    fr.onerror = function(){
+      $('impStatus').textContent = 'No pude leer ese archivo. Ábrelo, copia su contenido y pégalo arriba.';
+      $('impStatus').className = 'status-line bad';
+    };
+    fr.readAsText(f);
+    ev.target.value = '';
+  });
+
+  var wipeBtn = $('wipeBtn');
+  wipeBtn.addEventListener('click', function(){
+    var st = $('wipeStatus');
+    if(wipeBtn.dataset.armed !== '1'){
+      wipeBtn.dataset.armed = '1';
+      wipeBtn.textContent = 'Sí, borrar todo';
+      st.textContent = 'Se borran todas tus predicciones en este dispositivo. No hay vuelta atrás — copia antes tu respaldo.';
+      st.className = 'status-line bad';
+      setTimeout(function(){
+        if(wipeBtn.dataset.armed === '1'){
+          wipeBtn.dataset.armed = '0';
+          wipeBtn.textContent = 'Borrar todo';
+          st.textContent = '';
+        }
+      }, 6000);
+      return;
+    }
+    state.items = [];
+    save();
+    wipeBtn.dataset.armed = '0';
+    wipeBtn.textContent = 'Borrar todo';
+    st.textContent = 'Listo: no queda ninguna predicción guardada.';
+    st.className = 'status-line ok';
+    renderBadge(); renderAjustes();
+  });
+
+  /* ======================= arranque ======================= */
+  load();
+  $('fDate').value = todayISO();
+  renderConf();
+  renderRole();
+  renderChips();
+  renderBadge();
+  renderPend();
+  if(!state.onboarded) openOb();
+  go('nueva');
+})();
+</script>
