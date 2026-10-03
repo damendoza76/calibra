@@ -152,3 +152,15 @@
   color: var(--ink-faint) !important;
   margin-top: 12px !important;
 }
+.v1 {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  min-height: 44px;
+  border: 1px dashed var(--line-2);
+  border-radius: 11px;
+  background: transparent;
+  font-size: 0.72rem;
+  color: var(--accent-deep);
+  cursor: pointer;
+}

@@ -140,6 +140,17 @@ describe('migración desde la v1', () => {
     expect(await importar(db, JSON.stringify(respaldoV1))).toMatchObject({ predicciones: 0, deportistas: 0 })
   })
 
+  it('nunca enlaza lo real con una ficha de ejemplo del mismo nombre', async () => {
+    await cargarEjemplo(db, 'docente', '2026-10-03', 3) // incluye «Grupo 10B» de ejemplo
+    await migrarDesdeV1(db, almacen({ [CLAVE_V1]: JSON.stringify(V1) }))
+    const grupo = (await db.deportistas.toArray()).filter((d) => normalizarNombre(d.nombre) === 'grupo 10b')
+    expect(grupo).toHaveLength(2)
+    const real = grupo.find((d) => !d.ejemplo)!
+    expect((await db.predicciones.get('pa3'))!.deportistaId).toBe(real.id)
+    await borrarEjemplo(db)
+    expect((await db.predicciones.get('pa3'))!.deportistaId).toBe(real.id)
+  })
+
   it('si la ficha ya existe, no la duplica', async () => {
     await crearDeportista(db, { nombre: 'CAMILA' })
     await migrarDesdeV1(db, almacen({ [CLAVE_V1]: JSON.stringify(V1) }))

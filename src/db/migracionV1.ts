@@ -61,7 +61,8 @@ export function transformarV1(raw: unknown, ahora: Date, existentes: Deportista[
   const ahoraISO = ahora.toISOString()
 
   const porNombre = new Map<string, string>()
-  existentes.forEach((d) => porNombre.set(normalizarNombre(d.nombre), d.id))
+  // nunca se enlaza con una ficha de ejemplo: lo real no debe depender de algo que se puede borrar
+  existentes.filter((d) => !d.ejemplo).forEach((d) => porNombre.set(normalizarNombre(d.nombre), d.id))
   const nuevas: Deportista[] = []
 
   const predicciones = v1.items.filter(itemValido).map((it): Prediccion => {

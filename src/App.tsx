@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { HashRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { BarraInferior } from './components/BarraInferior'
-import { Encabezado } from './components/Encabezado'
 import { ProveedorDatos, useDatos } from './datos'
 import { estadoPendiente } from './domain/predicciones'
 import { Anotar } from './screens/Anotar'
+import { Ajustes } from './screens/Ajustes'
 import { Calibracion } from './screens/Calibracion'
 import { Deportistas } from './screens/Deportistas'
 import { Ficha } from './screens/Ficha'
@@ -13,20 +13,6 @@ import { Introduccion } from './screens/Introduccion'
 import { Pendientes } from './screens/Pendientes'
 import { useTema } from './theme/useTema'
 import s from './App.module.css'
-
-function Pronto({ titulo }: { titulo: string }) {
-  return (
-    <>
-      <Encabezado />
-      <div className="sec-title">
-        <h2>{titulo}</h2>
-      </div>
-      <div className="empty">
-        <p>Esta pantalla llega en el siguiente paso.</p>
-      </div>
-    </>
-  )
-}
 
 function SubirAlCambiar() {
   const { pathname } = useLocation()
@@ -38,7 +24,6 @@ function SubirAlCambiar() {
 
 function Marco() {
   const { ajustes, predicciones, hoy } = useDatos()
-  const [introAbierta, setIntroAbierta] = useState(!ajustes.introVista)
   useTema(ajustes.tema)
   const listas = predicciones.filter((p) => p.estado === 'pendiente' && estadoPendiente(p, hoy) !== 'esperando').length
 
@@ -53,12 +38,12 @@ function Marco() {
           <Route path="/anotar" element={<Anotar />} />
           <Route path="/pendientes" element={<Pendientes />} />
           <Route path="/calibracion" element={<Calibracion />} />
-          <Route path="/ajustes" element={<Pronto titulo="Ajustes" />} />
+          <Route path="/ajustes" element={<Ajustes />} />
           <Route path="*" element={<Hoy />} />
         </Routes>
       </main>
       <BarraInferior pendientesListas={listas} />
-      {introAbierta && <Introduccion rolActual={ajustes.rol} onListo={() => setIntroAbierta(false)} />}
+      {!ajustes.introVista && <Introduccion rolActual={ajustes.rol} />}
     </>
   )
 }

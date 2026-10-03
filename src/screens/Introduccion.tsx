@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
 import { db, guardarAjustes } from '../db'
 import { LISTA_ROLES, ROLES } from '../domain/roles'
@@ -6,7 +7,8 @@ import type { Rol } from '../domain/tipos'
 import s from './Introduccion.module.css'
 
 /** Las tres líneas de la v1, la regla única y el ejemplo del RPE. */
-export function Introduccion({ rolActual, onListo }: { rolActual: Rol | null; onListo: () => void }) {
+export function Introduccion({ rolActual }: { rolActual: Rol | null }) {
+  const nav = useNavigate()
   const [rol, setRol] = useState<Rol | null>(rolActual)
   const titulo = useRef<HTMLHeadingElement>(null)
   useEffect(() => {
@@ -14,8 +16,13 @@ export function Introduccion({ rolActual, onListo }: { rolActual: Rol | null; on
   }, [])
 
   async function empezar() {
+    // al guardar introVista, la introducción se cierra sola
     await guardarAjustes(db, { rol: rol ?? 'deportivo', introVista: true })
-    onListo()
+  }
+
+  async function traerRespaldo() {
+    await empezar()
+    nav('/ajustes?importar=1')
   }
 
   return (
@@ -85,6 +92,9 @@ export function Introduccion({ rolActual, onListo }: { rolActual: Rol | null; on
         </div>
         <button type="button" className="btn btn-primary" onClick={empezar} style={{ marginTop: 16 }}>
           Empezar
+        </button>
+        <button type="button" className={s.v1} onClick={traerRespaldo}>
+          ¿Usabas la versión de la charla? Trae aquí tu respaldo →
         </button>
         <p className={s.privado}>Todo queda en este teléfono. Sin cuenta, sin servidor.</p>
       </motion.div>

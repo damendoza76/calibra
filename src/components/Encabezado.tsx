@@ -1,11 +1,12 @@
 import type { ReactNode } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { IconoAjustes, IconoAtras } from './Iconos'
 import s from './Encabezado.module.css'
 
 /** Barra superior: marca + acceso a Ajustes, o botón de volver en pantallas internas. */
 export function Encabezado({ volver, derecha }: { volver?: boolean; derecha?: ReactNode }) {
   const nav = useNavigate()
+  const { pathname } = useLocation()
   return (
     <header className={s.barra}>
       {volver ? (
@@ -22,9 +23,11 @@ export function Encabezado({ volver, derecha }: { volver?: boolean; derecha?: Re
       )}
       <div className={s.derecha}>
         {derecha}
-        <Link to="/ajustes" className={s.ajustes} aria-label="Ajustes">
-          <IconoAjustes />
-        </Link>
+        {pathname !== '/ajustes' && (
+          <Link to="/ajustes" className={s.ajustes} aria-label="Ajustes">
+            <IconoAjustes />
+          </Link>
+        )}
       </div>
     </header>
   )
