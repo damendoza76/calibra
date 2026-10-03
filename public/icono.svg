@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- fondo ámbar con líneas de libreta -->
+  <rect width="512" height="512" fill="#E39A00"/>
+  <g stroke="#1A1200" stroke-opacity="0.08" stroke-width="4">
+    <path d="M0 96H512M0 160H512M0 224H512M0 288H512M0 352H512M0 416H512"/>
+  </g>
+  <!-- sello: círculo de tinta -->
+  <circle cx="256" cy="256" r="168" fill="#FFFDF8"/>
+  <circle cx="256" cy="256" r="168" fill="none" stroke="#16120B" stroke-width="14"/>
+  <circle cx="256" cy="256" r="146" fill="none" stroke="#16120B" stroke-width="5" stroke-dasharray="14 12"/>
+  <!-- diagonal de calibración perfecta -->
+  <path d="M168 344L344 168" stroke="#16120B" stroke-width="10" stroke-linecap="round" stroke-dasharray="4 22"/>
+  <!-- tres puntos: lo que dijiste vs. lo que pasó -->
+  <circle cx="200" cy="318" r="20" fill="#9E6A05"/>
+  <circle cx="262" cy="270" r="27" fill="#9E6A05"/>
+  <circle cx="318" cy="190" r="17" fill="#9E6A05"/>
+</svg>
