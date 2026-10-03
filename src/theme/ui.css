@@ -132,6 +132,13 @@ textarea.input {
 .btn-primary:hover {
   background: #d18e00;
 }
+.btn-acento {
+  flex: none;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+}
 .btn-ghost {
   background: transparent;
 }

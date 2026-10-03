@@ -1,0 +1,19 @@
+.fotoFila {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.fotoAcciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.fotoAcciones :global(.note) {
+  width: 100%;
+}
+.archivar {
+  width: 100%;
+  margin-top: 9px;
+}

@@ -1,0 +1,41 @@
+.mini {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--f-mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 3px 7px;
+  border-radius: 100px;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.bien {
+  color: var(--ok);
+  background: var(--ok-soft);
+}
+.sobre {
+  color: var(--warn);
+  background: var(--warn-soft);
+}
+.sub {
+  color: var(--accent-deep);
+  background: var(--accent-soft);
+}
+.pocos {
+  padding: 3px 0;
+}
+.puntos {
+  display: inline-flex;
+  gap: 3px;
+}
+.puntos i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: 1px solid var(--line-2);
+}
+.puntos i.lleno {
+  background: var(--accent);
+  border-color: var(--accent);
+}

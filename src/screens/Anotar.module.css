@@ -25,7 +25,7 @@
 }
 
 /* ---------- fichas en fila horizontal ---------- */
-.buscar {
+input.buscar {
   margin-bottom: 10px;
   min-height: 42px;
   padding: 9px 12px;

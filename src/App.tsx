@@ -5,6 +5,7 @@ import { Encabezado } from './components/Encabezado'
 import { ProveedorDatos, useDatos } from './datos'
 import { estadoPendiente } from './domain/predicciones'
 import { Anotar } from './screens/Anotar'
+import { Deportistas } from './screens/Deportistas'
 import { Hoy } from './screens/Hoy'
 import { Introduccion } from './screens/Introduccion'
 import { Pendientes } from './screens/Pendientes'
@@ -45,7 +46,7 @@ function Marco() {
       <main className={s.marco}>
         <Routes>
           <Route path="/" element={<Hoy />} />
-          <Route path="/deportistas" element={<Pronto titulo="Deportistas" />} />
+          <Route path="/deportistas" element={<Deportistas />} />
           <Route path="/deportistas/:id" element={<Pronto titulo="Ficha" />} />
           <Route path="/anotar" element={<Anotar />} />
           <Route path="/pendientes" element={<Pendientes />} />

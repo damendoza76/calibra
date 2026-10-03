@@ -1,0 +1,143 @@
+.cabeza {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 6px 0 16px;
+}
+.titulo {
+  font-size: 2.6rem;
+  font-weight: 800;
+}
+.sub {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+.buscar {
+  margin-bottom: 12px;
+}
+.pestanas {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 12px;
+  background: var(--surface-2);
+  margin-bottom: 14px;
+}
+.pestanas button {
+  flex: 1;
+  min-height: 38px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+.pestanas button[aria-selected='true'] {
+  background: var(--surface);
+  color: var(--ink);
+  font-weight: 600;
+  box-shadow: var(--shadow);
+}
+.leyenda {
+  display: flex;
+  justify-content: flex-end;
+  gap: 18px;
+  padding: 0 44px 6px 0;
+  font-family: var(--f-mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.fila {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid var(--line);
+}
+.fila:first-child {
+  border-top: 0;
+}
+.enlace {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 4px 12px 14px;
+  color: var(--ink);
+  text-decoration: none;
+  transition: background var(--t-fast) var(--ease);
+}
+.enlace:active {
+  background: var(--accent-soft);
+}
+.texto {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.nombre {
+  font-size: 1.02rem;
+  line-height: 1.25;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.etiquetas {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 5px;
+}
+.ejemplo {
+  font-family: var(--f-mono);
+  font-size: 0.54rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  border: 1px solid color-mix(in srgb, var(--accent) 50%, transparent);
+  border-radius: 100px;
+  padding: 2px 6px;
+}
+.nota {
+  font-family: var(--f-mono);
+  font-size: 0.64rem;
+  color: var(--ink-faint);
+  margin-top: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pend {
+  color: var(--accent-deep);
+}
+.datos {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+}
+.mas {
+  flex: none;
+  width: 40px;
+  align-self: stretch;
+  border: 0;
+  background: transparent;
+  color: var(--ink-faint);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
