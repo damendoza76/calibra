@@ -5,6 +5,7 @@ import { Encabezado } from './components/Encabezado'
 import { ProveedorDatos, useDatos } from './datos'
 import { estadoPendiente } from './domain/predicciones'
 import { Anotar } from './screens/Anotar'
+import { Calibracion } from './screens/Calibracion'
 import { Deportistas } from './screens/Deportistas'
 import { Ficha } from './screens/Ficha'
 import { Hoy } from './screens/Hoy'
@@ -51,7 +52,7 @@ function Marco() {
           <Route path="/deportistas/:id" element={<Ficha />} />
           <Route path="/anotar" element={<Anotar />} />
           <Route path="/pendientes" element={<Pendientes />} />
-          <Route path="/calibracion" element={<Pronto titulo="Calibración" />} />
+          <Route path="/calibracion" element={<Calibracion />} />
           <Route path="/ajustes" element={<Pronto titulo="Ajustes" />} />
           <Route path="*" element={<Hoy />} />
         </Routes>

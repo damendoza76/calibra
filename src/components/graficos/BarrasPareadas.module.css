@@ -1,0 +1,74 @@
+.rejilla {
+  stroke: var(--line);
+}
+.base {
+  stroke: var(--line-2);
+}
+.eje {
+  font-family: var(--f-mono);
+  font-size: 8.5px;
+  fill: var(--ink-faint);
+}
+.banda {
+  font-family: var(--f-mono);
+  font-size: 8.5px;
+  fill: var(--ink-soft);
+}
+.valor {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  font-weight: 600;
+  fill: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+.vacio {
+  font-family: var(--f-mono);
+  font-size: 8px;
+  fill: var(--ink-faint);
+}
+.dijiste {
+  fill: var(--accent);
+  background: var(--accent);
+}
+.pasoIgual {
+  fill: var(--ok);
+  background: var(--ok);
+}
+.pasoMas {
+  fill: var(--ok);
+  background: var(--ok);
+}
+.pasoMenos {
+  fill: var(--warn);
+  background: var(--warn);
+}
+.animada .barra {
+  transform-box: fill-box;
+  transform-origin: bottom;
+  animation: crecer 420ms var(--ease) both;
+}
+@keyframes crecer {
+  from {
+    transform: scaleY(0);
+  }
+}
+.leyenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin-top: 6px;
+  font-family: var(--f-mono);
+  font-size: 0.62rem;
+  color: var(--ink-faint);
+}
+.leyenda span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.leyenda i {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  display: inline-block;
+}

@@ -1,0 +1,180 @@
+.titulo {
+  font-size: 2.3rem;
+  font-weight: 800;
+}
+
+/* ---------- filtros ---------- */
+.filtros {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.selector select {
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 36px 10px 12px;
+  border-radius: 11px;
+  border: 1px solid var(--line-2);
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23756e59' stroke-width='1.6'/%3E%3C/svg%3E")
+      no-repeat right 14px center,
+    var(--surface);
+  appearance: none;
+  font-family: var(--f-text);
+  font-size: 0.98rem;
+  color: var(--ink);
+}
+.chips {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.chips::-webkit-scrollbar {
+  display: none;
+}
+.chip {
+  flex: none;
+  min-height: 36px;
+  padding: 6px 12px;
+  border-radius: 100px;
+  border: 1px solid var(--line-2);
+  background: transparent;
+  font-size: 0.7rem;
+  color: var(--ink-soft);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.chip[aria-pressed='true'] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--bg);
+  font-weight: 600;
+}
+
+/* ---------- veredicto ---------- */
+.veredicto {
+  margin-top: 14px;
+  position: relative;
+  overflow: hidden;
+}
+.veredicto::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 5px;
+  background: var(--tono);
+}
+.bien {
+  --tono: var(--ok);
+}
+.sobre {
+  --tono: var(--warn);
+}
+.sub {
+  --tono: var(--accent-deep);
+}
+.titular {
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: 2.05rem;
+  line-height: 1.02;
+  color: var(--tono);
+  text-wrap: balance;
+}
+.detalle {
+  margin-top: 8px;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.lectura {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--bg);
+  border-left: 3px solid var(--tono);
+  font-size: 0.96rem;
+  line-height: 1.55;
+  color: var(--ink);
+}
+.cifras {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 14px;
+}
+.cifras > div {
+  background: var(--surface-2);
+  border-radius: 10px;
+  padding: 10px 10px 9px;
+  display: flex;
+  flex-direction: column;
+}
+.k {
+  font-family: var(--f-mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  line-height: 1.3;
+}
+.v {
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: 1.6rem;
+  margin-top: auto;
+  padding-top: 4px;
+}
+
+/* ---------- medidor ---------- */
+.medidor {
+  margin: 18px 4px 0;
+}
+.pista {
+  position: relative;
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(to right, var(--accent-soft), var(--surface-2) 40%, var(--surface-2) 60%, var(--warn-soft));
+}
+.zonaBien {
+  position: absolute;
+  left: 42.5%;
+  width: 15%;
+  top: 0;
+  bottom: 0;
+  background: var(--ok-soft);
+  border-left: 1px dashed var(--ok);
+  border-right: 1px dashed var(--ok);
+}
+.aguja {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: left 600ms var(--ease);
+}
+.aguja span {
+  display: grid;
+  place-items: center;
+  min-width: 34px;
+  height: 26px;
+  padding: 0 6px;
+  border-radius: 100px;
+  background: var(--tono);
+  color: var(--surface);
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  box-shadow: 0 0 0 3px var(--surface), var(--shadow);
+}
+.rotulos {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-family: var(--f-mono);
+  font-size: 0.58rem;
+  color: var(--ink-faint);
+}
+.graficos {
+  margin-top: 14px;
+}

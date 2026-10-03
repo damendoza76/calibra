@@ -1,0 +1,46 @@
+.zona {
+  fill: var(--ok-soft);
+}
+.cero {
+  stroke: var(--ok);
+  stroke-dasharray: 3 3;
+  opacity: 0.7;
+}
+.zonaTxt {
+  font-family: var(--f-mono);
+  font-size: 8.5px;
+  fill: var(--ok);
+}
+.lado {
+  font-family: var(--f-mono);
+  font-size: 8.5px;
+  fill: var(--ink-faint);
+}
+.eje {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  fill: var(--ink-faint);
+}
+.linea {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.punto {
+  fill: var(--accent-deep);
+  stroke: var(--surface);
+  stroke-width: 1.5;
+}
+.puntoBien {
+  fill: var(--ok);
+  stroke: var(--surface);
+  stroke-width: 1.5;
+}
+.puntoDebil {
+  fill: var(--surface);
+  stroke: var(--ink-faint);
+  stroke-width: 1.4;
+  stroke-dasharray: 2 2;
+}
